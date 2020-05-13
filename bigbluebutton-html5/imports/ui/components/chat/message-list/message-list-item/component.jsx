@@ -147,7 +147,7 @@ class MessageListItem extends Component {
                 <FormattedTime value={dateTime} />
               </time>
             </div>
-            <div className={styles.messages} data-test="chatUserMessage">
+            <div className={styles.messages} data-test="chatUserMessage">ss
               {chats.map(message => (
                 <Message
                   className={(regEx.test(message.text) ? styles.hyperlink : styles.message)}
