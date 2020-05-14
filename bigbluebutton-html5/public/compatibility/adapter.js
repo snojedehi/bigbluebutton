@@ -989,6 +989,7 @@
     }
     window.navigator.mediaDevices.getDisplayMedia = function (constraints) {
       alert(2)
+
       return getSourceId(constraints).then(function (sourceId) {
         var widthSpecified = constraints.video && constraints.video.width;
         var heightSpecified = constraints.video && constraints.video.height;
