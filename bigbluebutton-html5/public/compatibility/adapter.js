@@ -988,13 +988,10 @@
       return;
     }
     window.navigator.mediaDevices.getDisplayMedia = function (constraints) {
-      alert(2)
-
       return getSourceId(constraints).then(function (sourceId) {
         var widthSpecified = constraints.video && constraints.video.width;
         var heightSpecified = constraints.video && constraints.video.height;
         var frameRateSpecified = constraints.video && constraints.video.frameRate;
-        constraints.audio=true;
         constraints.video = {
           mandatory: {
             chromeMediaSource: 'desktop',
@@ -1719,7 +1716,6 @@
   });
   exports.shimGetDisplayMedia = shimGetDisplayMedia;
   function shimGetDisplayMedia(window) {
-    alert(3)
     if (!('getDisplayMedia' in window.navigator)) {
       return;
     }
@@ -2003,8 +1999,6 @@
       return;
     }
     window.navigator.mediaDevices.getDisplayMedia = function (constraints) {
-      alert(1)
-      constraints.audio=true;
       if (!(constraints && constraints.video)) {
         var err = new DOMException('getDisplayMedia without video ' + 'constraints is undefined');
         err.name = 'NotFoundError';
