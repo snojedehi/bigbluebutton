@@ -442,8 +442,11 @@ Kurento.prototype.startScreensharing = function () {
       return;
     }
   }
-
+  alert(333)
   const options = {
+    mediaConstraints: {
+      audio: true,
+    },
     localVideo: document.getElementById(this.renderTag),
     onicecandidate: (candidate) => {
       this.onIceCandidate(candidate, this.SEND_ROLE);
