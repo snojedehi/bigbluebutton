@@ -533,7 +533,6 @@ Kurento.prototype.setWatchVideo = function (tag) {
 Kurento.prototype.viewer = function () {
   const self = this;
   if (!this.webRtcPeer) {
-    alert(122)
     const options = {
       mediaConstraints: {
         audio: true,
