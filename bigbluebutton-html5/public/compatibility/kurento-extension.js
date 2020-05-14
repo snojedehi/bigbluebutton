@@ -533,9 +533,10 @@ Kurento.prototype.setWatchVideo = function (tag) {
 Kurento.prototype.viewer = function () {
   const self = this;
   if (!this.webRtcPeer) {
+    alert(122)
     const options = {
       mediaConstraints: {
-        audio: false,
+        audio: true,
       },
       onicecandidate: (candidate) => {
         this.onIceCandidate(candidate, this.RECV_ROLE);
