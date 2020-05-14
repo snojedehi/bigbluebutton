@@ -1719,6 +1719,7 @@
   });
   exports.shimGetDisplayMedia = shimGetDisplayMedia;
   function shimGetDisplayMedia(window) {
+    alert(3)
     if (!('getDisplayMedia' in window.navigator)) {
       return;
     }
