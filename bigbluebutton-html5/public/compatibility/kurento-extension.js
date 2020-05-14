@@ -535,7 +535,7 @@ Kurento.prototype.viewer = function () {
   if (!this.webRtcPeer) {
     const options = {
       mediaConstraints: {
-        audio: true,
+        audio: false,
       },
       onicecandidate: (candidate) => {
         this.onIceCandidate(candidate, this.RECV_ROLE);
