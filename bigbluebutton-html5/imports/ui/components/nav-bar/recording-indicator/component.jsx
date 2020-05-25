@@ -193,11 +193,10 @@ class RecordingIndicator extends PureComponent {
 
     return (
         <DropdownListItem
-            key="list-item-settings"
+            key="list-item-record"
             icon="settings"
-            label={intl.formatMessage(intlMessages.settingsLabel)}
-            description={intl.formatMessage(intlMessages.settingsDesc)}
-            onClick={() => mountModal(<SettingsMenuContainer />)}
+            label="aa"
+            description="sss"
         />
     );
   }
