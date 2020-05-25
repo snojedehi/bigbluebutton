@@ -90,7 +90,7 @@ class AudioControls extends PureComponent {
               color={!muted ? 'primary' : 'default'}
               ghost={muted}
               // icon={muted ? 'mute' : 'unmute'}
-              customIcon={muted? <i className="fas fa-volume-mute"></i>:<i className="fas fa-headphones-alt"></i>}
+              customIcon={muted? <i className="fas fa-headset"></i>: <i className="fas fa-microphone-alt-slash"></i>}
               size="lg"
               circle
               accessKey={shortcuts.toggleMute}
