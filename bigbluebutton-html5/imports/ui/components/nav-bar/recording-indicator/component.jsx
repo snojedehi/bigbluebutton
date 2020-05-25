@@ -199,7 +199,7 @@ class RecordingIndicator extends PureComponent {
             icon="settings"
             label="aa"
             description="sss"
-            onClick={}
+            onClick={() =>}
         />
     );
   }
