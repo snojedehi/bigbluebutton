@@ -101,7 +101,6 @@ class Base extends Component {
       meetingExisted,
     } = this.state;
 
-
     if (!prevProps.subscriptionsReady && subscriptionsReady) {
       logger.info({ logCode: 'startup_client_subscriptions_ready' }, 'Subscriptions are ready');
     }

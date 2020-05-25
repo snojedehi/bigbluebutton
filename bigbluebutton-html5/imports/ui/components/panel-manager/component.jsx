@@ -400,7 +400,8 @@ class PanelManager extends PureComponent {
         }}
       >
         {this.renderPoll()}
-      </Resizable>
+      </
+      Resizable>
     );
   }
 
@@ -411,7 +412,7 @@ class PanelManager extends PureComponent {
     if (enableResize) {
       panels.push(
         this.renderUserListResizable(),
-        <div t='shayan' className={styles.userlistPad} key={this.padKey} />,
+        <div t='s' className={styles.userlistPad} key={this.padKey} />,
       );
     } else {
       panels.push(this.renderUserList());
