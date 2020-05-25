@@ -73,7 +73,7 @@ const propTypes = {
    * @defaultvalue undefined
    */
   customIcon: PropTypes.node,
-  myCustomIcon: PropTypes.string,
+  mycustomicon: PropTypes.string,
 };
 
 const defaultProps = {
@@ -148,7 +148,7 @@ export default class Button extends BaseButton {
     const remainingProps = Object.assign({}, otherProps);
     delete remainingProps.icon;
     delete remainingProps.customIcon;
-    delete remainingProps.myCustomIcon;
+    delete remainingProps.mycustomicon;
     delete remainingProps.size;
     delete remainingProps.color;
     delete remainingProps.ghost;
@@ -210,7 +210,7 @@ export default class Button extends BaseButton {
     const {
       icon: iconName,
       customIcon,
-      myCustomIcon,
+      mycustomicon,
     } = this.props;
 
     if (iconName) {
@@ -218,8 +218,8 @@ export default class Button extends BaseButton {
     } if (customIcon) {
       return customIcon;
     }
-    if (myCustomIcon) {
-      return (<i className={myCustomIcon}></i>);
+    if (mycustomicon) {
+      return (<i className={mycustomicon}></i>);
     }
     return null;
   }
