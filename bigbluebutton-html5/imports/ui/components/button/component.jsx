@@ -148,6 +148,7 @@ export default class Button extends BaseButton {
     const remainingProps = Object.assign({}, otherProps);
     delete remainingProps.icon;
     delete remainingProps.customIcon;
+    delete remainingProps.myCustomIcon;
     delete remainingProps.size;
     delete remainingProps.color;
     delete remainingProps.ghost;
@@ -209,6 +210,7 @@ export default class Button extends BaseButton {
     const {
       icon: iconName,
       customIcon,
+      myCustomIcon,
     } = this.props;
 
     if (iconName) {
