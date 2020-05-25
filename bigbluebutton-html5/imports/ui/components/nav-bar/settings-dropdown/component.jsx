@@ -19,6 +19,7 @@ import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import FullscreenService from '../../fullscreen-button/service';
 
 import { styles } from '../styles';
+import RecordingIndicator from "../recording-indicator/container";
 
 const intlMessages = defineMessages({
   optionsLabel: {
@@ -227,6 +228,17 @@ class SettingsDropdown extends PureComponent {
 
     return _.compact([
       this.getFullscreenItem(),
+      (<RecordingIndicator
+          mountModal={mountModal}
+          amIModerator={amIModerator}
+      />),
+      (<DropdownListItem
+          key="list-item-settings"
+          icon="settings"
+          label={intl.formatMessage(intlMessages.settingsLabel)}
+          description={intl.formatMessage(intlMessages.settingsDesc)}
+          onClick={() => mountModal(<SettingsMenuContainer />)}
+      />),
       (<DropdownListItem
         key="list-item-settings"
         icon="settings"
