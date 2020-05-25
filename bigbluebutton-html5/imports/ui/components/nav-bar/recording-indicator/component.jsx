@@ -104,7 +104,7 @@ class RecordingIndicator extends PureComponent {
       allowStartStopRecording,
       notify,
       micUser,
-      key,
+        key,
     } = this.props;
 
     const { time } = this.state;
