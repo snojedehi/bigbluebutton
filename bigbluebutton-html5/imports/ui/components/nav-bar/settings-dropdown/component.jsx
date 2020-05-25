@@ -201,9 +201,11 @@ class SettingsDropdown extends PureComponent {
   }
   record(mountModal, amIModerator){
     return(
-        <RecordingIndicator
-            key="list-item-record"
-
+        <DropdownListItem
+            key="list-item-fullscreen2"
+            icon={fullscreenIcon}
+            label={fullscreenLabel}
+            description={fullscreenDesc}
         />
     )
   }
