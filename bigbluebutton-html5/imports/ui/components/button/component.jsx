@@ -73,6 +73,7 @@ const propTypes = {
    * @defaultvalue undefined
    */
   customIcon: PropTypes.node,
+  myCustomIcon: PropTypes.string,
 };
 
 const defaultProps = {
@@ -215,7 +216,9 @@ export default class Button extends BaseButton {
     } if (customIcon) {
       return customIcon;
     }
-
+    if (myCustomIcon) {
+      return (<i className={myCustomIcon}></i>);
+    }
     return null;
   }
 
