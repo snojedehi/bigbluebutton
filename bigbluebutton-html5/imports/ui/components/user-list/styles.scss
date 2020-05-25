@@ -11,6 +11,7 @@
   --unread-messages-bg: var(--color-danger);
   --user-list-text: var(--color-gray);
   --user-list-bg: var(--color-off-white);
+  --myUser-list-bg: var(--color-off-white);
 
   --user-thumbnail-border: var(--color-gray-light);
   --user-thumbnail-text: var(--user-thumbnail-border);
@@ -83,7 +84,7 @@
 .userList {
   @extend %flex-column;
   justify-content: flex-start;
-  background-color: var(--user-list-bg);
+  background-color: #FFFFFF;
   color: var(--user-list-text);
   height: 100%;
 }
