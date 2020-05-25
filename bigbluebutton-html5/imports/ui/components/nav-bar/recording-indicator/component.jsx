@@ -104,6 +104,7 @@ class RecordingIndicator extends PureComponent {
       allowStartStopRecording,
       notify,
       micUser,
+      key,
     } = this.props;
 
     const { time } = this.state;
@@ -194,7 +195,7 @@ class RecordingIndicator extends PureComponent {
 
     return (
         <DropdownListItem
-            key="list-item-record"
+            key={key}
             icon="settings"
             label="aa"
             description="sss"
