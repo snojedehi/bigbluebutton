@@ -101,6 +101,7 @@ const propTypes = {
   shortcuts: PropTypes.string,
   isBreakoutRoom: PropTypes.bool,
   isMeteorConnected: PropTypes.bool.isRequired,
+  key: PropTypes.string,
 };
 
 const defaultProps = {
