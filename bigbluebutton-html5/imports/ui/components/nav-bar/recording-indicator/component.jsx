@@ -5,7 +5,6 @@ import Tooltip from '/imports/ui/components/tooltip/component';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import { styles } from './styles';
-import DropdownListItem from '/imports/ui/components/dropdown/list/item/component';
 
 const intlMessages = defineMessages({
   notificationRecordingStart: {
@@ -54,6 +53,7 @@ const propTypes = {
   mountModal: PropTypes.func.isRequired,
   time: PropTypes.number,
   allowStartStopRecording: PropTypes.bool.isRequired,
+  key:PropTypes.string
 };
 
 const defaultProps = {
@@ -104,7 +104,7 @@ class RecordingIndicator extends PureComponent {
       allowStartStopRecording,
       notify,
       micUser,
-        key,
+      key
     } = this.props;
 
     const { time } = this.state;
@@ -194,13 +194,36 @@ class RecordingIndicator extends PureComponent {
     const recordingButton = recording ? recordMeetingButtonWithTooltip : recordMeetingButton;
 
     return (
-        <DropdownListItem
-            key={key}
-            icon="settings"
-            label="aa"
-            description="sss"
-            onClick={() =>alert(1)}
-        />
+      <Fragment>
+        {/*{record*/}
+        {/*  ? <span className={styles.presentationTitleSeparator} aria-hidden>|</span>*/}
+        {/*  : null}*/}
+        <div className={styles.recordingIndicator}>
+          {showButton
+            ? recordingButton
+            : null}
+
+          {showButton ? null : (
+            <Tooltip
+              title={`${intl.formatMessage(recording
+                ? intlMessages.notificationRecordingStart
+                : intlMessages.notificationRecordingStop)}`}
+            >
+              <div
+                aria-label={`${intl.formatMessage(recording
+                  ? intlMessages.notificationRecordingStart
+                  : intlMessages.notificationRecordingStop)}`}
+                className={styles.recordingStatusViewOnly}
+              >
+                {recordingIndicatorIcon}
+
+                {recording
+                  ? <div className={styles.presentationTitle}>{humanizeSeconds(time)}</div> : null}
+              </div>
+            </Tooltip>
+          )}
+        </div>
+      </Fragment>
     );
   }
 }

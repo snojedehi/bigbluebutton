@@ -203,8 +203,7 @@ class SettingsDropdown extends PureComponent {
     return(
         <RecordingIndicator
             key="list-item-record"
-            mountModal={mountModal}
-            amIModerator={amIModerator}
+
         />
     )
   }
