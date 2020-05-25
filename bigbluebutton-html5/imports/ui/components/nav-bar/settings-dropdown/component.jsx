@@ -203,9 +203,9 @@ class SettingsDropdown extends PureComponent {
     return(
         <DropdownListItem
             key="list-item-fullscreen2"
-            icon={fullscreenIcon}
-            label={fullscreenLabel}
-            description={fullscreenDesc}
+            icon="settings"
+            label="ss"
+            description="ss"
         />
     )
   }
