@@ -145,7 +145,7 @@ class RecordingIndicator extends PureComponent {
             />
             <circle
               stroke={recording ? '#F00' : '#000'}
-              fill={recording ? '#F00' : '#000'}
+              fill={recording ? '#F00' : '#333'}
               r="4"
               cx="10"
               cy="10"
