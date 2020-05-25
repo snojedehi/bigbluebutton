@@ -211,7 +211,7 @@ class ActionsDropdown extends PureComponent {
             aria-label={intl.formatMessage(intlMessages.actionsLabel)}
             className={styles.button}
             label={intl.formatMessage(intlMessages.actionsLabel)}
-            customIcon="far fa-file-powerpoint"
+            customIcon="<i className=" far fa-file-powerpoint"></i>"
             color="primary"
             size="lg"
             circle
