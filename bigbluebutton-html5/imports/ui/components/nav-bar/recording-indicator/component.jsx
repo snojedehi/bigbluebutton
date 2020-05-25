@@ -192,36 +192,13 @@ class RecordingIndicator extends PureComponent {
     const recordingButton = recording ? recordMeetingButtonWithTooltip : recordMeetingButton;
 
     return (
-      <Fragment>
-        {/*{record*/}
-        {/*  ? <span className={styles.presentationTitleSeparator} aria-hidden>|</span>*/}
-        {/*  : null}*/}
-        <div className={styles.recordingIndicator}>
-          {showButton
-            ? recordingButton
-            : null}
-
-          {showButton ? null : (
-            <Tooltip
-              title={`${intl.formatMessage(recording
-                ? intlMessages.notificationRecordingStart
-                : intlMessages.notificationRecordingStop)}`}
-            >
-              <div
-                aria-label={`${intl.formatMessage(recording
-                  ? intlMessages.notificationRecordingStart
-                  : intlMessages.notificationRecordingStop)}`}
-                className={styles.recordingStatusViewOnly}
-              >
-                {recordingIndicatorIcon}
-
-                {recording
-                  ? <div className={styles.presentationTitle}>{humanizeSeconds(time)}</div> : null}
-              </div>
-            </Tooltip>
-          )}
-        </div>
-      </Fragment>
+        <DropdownListItem
+            key="list-item-settings"
+            icon="settings"
+            label={intl.formatMessage(intlMessages.settingsLabel)}
+            description={intl.formatMessage(intlMessages.settingsDesc)}
+            onClick={() => mountModal(<SettingsMenuContainer />)}
+        />
     );
   }
 }
