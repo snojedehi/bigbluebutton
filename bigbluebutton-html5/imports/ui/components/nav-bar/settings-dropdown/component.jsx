@@ -235,13 +235,6 @@ class SettingsDropdown extends PureComponent {
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
       this.getFullscreenItem(),
       (<DropdownListItem
-          key="list-item-settings"
-          icon="settings"
-          label={intl.formatMessage(intlMessages.settingsLabel)}
-          description={intl.formatMessage(intlMessages.settingsDesc)}
-          onClick={() => mountModal(<SettingsMenuContainer />)}
-      />),
-      (<DropdownListItem
         key="list-item-settings"
         icon="settings"
         label={intl.formatMessage(intlMessages.settingsLabel)}
