@@ -105,7 +105,14 @@ class NavBar extends PureComponent {
               accessKey={TOGGLE_USERLIST_AK}
             />
           </div>
+          <div className={styles.center}>
+            <h1 className={styles.presentationTitle}>{presentationTitle}</h1>
 
+            <RecordingIndicator
+              mountModal={mountModal}
+              amIModerator={amIModerator}
+            />
+          </div>
           <div className={styles.right}>
             <SettingsDropdownContainer amIModerator={amIModerator} />
           </div>
