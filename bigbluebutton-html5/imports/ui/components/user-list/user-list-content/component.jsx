@@ -53,18 +53,7 @@ class UserContent extends PureComponent {
         className={styles.content}
         role="complementary"
       >
-        {CHAT_ENABLED
-          ? (<UserMessages
-            {...{
-              isPublicChat,
-              activeChats,
-              compact,
-              intl,
-              roving,
-            }}
-          />
-          ) : null
-        }
+
         {currentUser.role === ROLE_MODERATOR
           ? (
             <UserCaptionsContainer
@@ -107,6 +96,18 @@ class UserContent extends PureComponent {
             requestUserInformation,
           }}
         />
+        {CHAT_ENABLED
+            ? (<UserMessages
+                    {...{
+                      isPublicChat,
+                      activeChats,
+                      compact,
+                      intl,
+                      roving,
+                    }}
+                />
+            ) : null
+        }
       </div>
     );
   }
