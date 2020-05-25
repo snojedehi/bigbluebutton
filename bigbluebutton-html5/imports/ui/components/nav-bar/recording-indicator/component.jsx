@@ -5,6 +5,7 @@ import Tooltip from '/imports/ui/components/tooltip/component';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import { styles } from './styles';
+import DropdownListItem from '/imports/ui/components/dropdown/list/item/component';
 
 const intlMessages = defineMessages({
   notificationRecordingStart: {
