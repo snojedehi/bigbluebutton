@@ -89,7 +89,8 @@ class AudioControls extends PureComponent {
                 : intl.formatMessage(intlMessages.muteAudio)}
               color={!muted ? 'primary' : 'default'}
               ghost={muted}
-              icon={muted ? 'mute' : 'unmute'}
+              // icon={muted ? 'mute' : 'unmute'}
+              customIcon={muted? <i className="fas fa-volume-up"></i>: <i className="fas fa-volume-mute"></i>}
               size="lg"
               circle
               accessKey={shortcuts.toggleMute}
