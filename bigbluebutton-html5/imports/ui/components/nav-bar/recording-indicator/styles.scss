@@ -18,7 +18,7 @@
     border: none;
     box-shadow: none;
     background-color: transparent !important;
-    color: var(--color-white) !important;
+    color: var(--color-gray-dark) !important;
   }
 
   &:hover {
@@ -34,7 +34,10 @@
 
 .recordingControlON {
   @extend %recordingControl;
+  span {
 
+    color: var(--color-white) !important;
+  }
   padding: 5px;
   background-color: var(--color-primary);
   border: var(--border-size-large) solid var(--color-primary);
