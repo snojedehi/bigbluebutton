@@ -227,11 +227,12 @@ class SettingsDropdown extends PureComponent {
       : null;
 
     return _.compact([
-      this.getFullscreenItem(),
+
       (<RecordingIndicator
           mountModal={mountModal}
           amIModerator={amIModerator}
       />),
+      this.getFullscreenItem(),
       (<DropdownListItem
           key="list-item-settings"
           icon="settings"
