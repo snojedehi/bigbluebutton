@@ -90,7 +90,7 @@ class AudioControls extends PureComponent {
               color={!muted ? 'primary' : 'default'}
               ghost={muted}
               // icon={muted ? 'mute' : 'unmute'}
-              customIcon={muted? <i className="fas fa-headset"></i>: <i className="fas fa-microphone-alt-slash"></i>}
+              customIcon={muted? <I className="fas fa-headset"></I>: <I className="fas fa-microphone-alt-slash"></I>}
               size="lg"
               circle
               accessKey={shortcuts.toggleMute}
@@ -107,7 +107,7 @@ class AudioControls extends PureComponent {
             : intl.formatMessage(intlMessages.joinAudio)}
           color={inAudio ? 'primary' : 'default'}
           ghost={!inAudio}
-          customIcon={inAudio? <i className="fas fa-volume-mute"></i>:<i className="fas fa-headphones-alt"></i>}
+          customIcon={inAudio? <I className="fas fa-volume-mute"></I>:<I className="fas fa-headphones-alt"></I>}
           size="lg"
           circle
           accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
