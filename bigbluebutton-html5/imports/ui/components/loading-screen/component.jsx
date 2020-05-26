@@ -5,7 +5,7 @@ const LoadingScreen = ({ children }) => (
   <div className={styles.background}>
 
     <div className={styles.spinner}>
-        <img src="resources/images/cls.gif" alt="Loading" />
+        <img src="resources/images/cls.gif" alt="Loading" sizes="90" />
       {/*<div className={styles.bounce1} />*/}
       {/*<div className={styles.bounce2} />*/}
       <div />
