@@ -19,12 +19,7 @@
   display: flex;
   flex-direction: column;
 }
-.chatResizable{
-  position: absolute !important;
-  right: 0;
-  bottom: 0;
-  height: 40%;
-}
+
 .navbar {
   position: relative;
   text-align: center;
@@ -228,4 +223,11 @@
   padding: var(--bars-padding);
   position: relative;
   order: 3;
+}
+
+.chatResizable{
+  position: absolute !important;
+  right: 0;
+  bottom: 0;
+  height: 40%;
 }
