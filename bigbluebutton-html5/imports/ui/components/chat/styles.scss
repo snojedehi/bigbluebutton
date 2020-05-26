@@ -35,6 +35,7 @@
 }
 
 .header {
+  border-bottom: 1px dashed #75828f;
   position: relative;
   top: var(--poll-header-offset);
   display: flex;
