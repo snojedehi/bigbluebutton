@@ -3,10 +3,11 @@ import { styles } from './styles.scss';
 
 const LoadingScreen = ({ children }) => (
   <div className={styles.background}>
-      <img src="/resources/images/cls.gif" alt="Loading" />
+
     <div className={styles.spinner}>
-      <div className={styles.bounce1} />
-      <div className={styles.bounce2} />
+        <img src="resources/images/cls.gif" alt="Loading" />
+      {/*<div className={styles.bounce1} />*/}
+      {/*<div className={styles.bounce2} />*/}
       <div />
     </div>
     <div className={styles.message}>
