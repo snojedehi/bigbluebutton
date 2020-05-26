@@ -16,12 +16,7 @@
   line-height: $lineHeight;
   max-height: calc(#{"$lineHeight * $lineCount"});
 }
-.ChatResizable{
-  position: absolute !important;
-  right: 0;
-  bottom: 0;
-  height: 40%;
-}
+
 .chat {
   background-color: var(--color-white);
   padding:
