@@ -4,6 +4,7 @@ import { styles } from './styles.scss';
 const LoadingScreen = ({ children }) => (
   <div className={styles.background}>
     <div className={styles.spinner}>
+        <img src="public/resources/images/cls.gif" alt="Loading" />
       <div className={styles.bounce1} />
       <div className={styles.bounce2} />
       <div />
