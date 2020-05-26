@@ -188,6 +188,7 @@ class PanelManager extends PureComponent {
 
     return (
       <Resizable
+        className="ChatResizable"
         minWidth={CHAT_MIN_WIDTH}
         maxWidth={CHAT_MAX_WIDTH}
         ref={(node) => { this.resizableChat = node; }}
