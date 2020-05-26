@@ -162,7 +162,7 @@ class PanelManager extends PureComponent {
 
     return (
       <section
-        className={styles.chat}
+        className={styles.chatResizable}
         aria-label={intl.formatMessage(intlMessages.chatLabel)}
         key={enableResize ? null : this.chatKey}
       >
@@ -188,7 +188,7 @@ class PanelManager extends PureComponent {
 
     return (
       <Resizable
-        className={styles.resizableChat}
+        className={styles.chatR}
         minWidth={CHAT_MIN_WIDTH}
         maxWidth={CHAT_MAX_WIDTH}
         ref={(node) => { this.resizableChat = node; }}
