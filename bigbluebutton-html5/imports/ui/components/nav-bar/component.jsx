@@ -104,19 +104,6 @@ class NavBar extends PureComponent {
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
             />
-              <Button
-                  data-test="chatListToggleButton"
-                  // onClick={NavBar.handleToggleUserList}
-                  ghost
-                  circle
-                  hideLabel
-                  label={intl.formatMessage(intlMessages.toggleUserListLabel)}
-                  aria-label={ariaLabel}
-                  icon="user"
-                  className={cx(toggleBtnClasses)}
-                  aria-expanded={isExpanded}
-                  accessKey={TOGGLE_USERLIST_AK}
-              />
           </div>
 
           <div className={styles.center}>
