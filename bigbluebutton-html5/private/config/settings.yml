@@ -6,11 +6,11 @@ public:
     autoJoin: true
     listenOnlyMode: true
     forceListenOnly: false
-    skipCheck: true
-    clientTitle: Classzabanam
-    appName: Classzabanam HTML5 Client
+    skipCheck: false
+    clientTitle: BigBlueButton
+    appName: BigBlueButton HTML5 Client
     bbbServerVersion: 2.2
-    copyright: "©2019 Classzabanam Inc."
+    copyright: "©2019 BigBlueButton Inc."
     html5ClientBuild: HTML5_CLIENT_VERSION
     helpLink: https://bigbluebutton.org/html5/
     lockOnJoin: true
