@@ -114,6 +114,7 @@ class AudioControls extends PureComponent {
           />
       </span>);
   }
+
 }
 
 AudioControls.propTypes = propTypes;
