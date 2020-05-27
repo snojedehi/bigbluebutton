@@ -5,7 +5,7 @@ public:
     audioChatNotification: false
     autoJoin: true
     listenOnlyMode: true
-    forceListenOnly: false
+    forceListenOnly: true
     skipCheck: true
     clientTitle: Classzabanam
     appName: Classzabanam HTML5 Client
