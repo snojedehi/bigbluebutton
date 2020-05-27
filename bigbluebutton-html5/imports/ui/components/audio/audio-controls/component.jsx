@@ -26,6 +26,7 @@ const intlMessages = defineMessages({
   },
 });
 
+
 const propTypes = {
   processToggleMuteFromOutside: PropTypes.func.isRequired,
   handleToggleMuteMicrophone: PropTypes.func.isRequired,
