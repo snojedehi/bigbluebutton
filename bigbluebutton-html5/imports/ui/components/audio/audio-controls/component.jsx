@@ -41,6 +41,16 @@ const propTypes = {
 };
 
 class AudioControls extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      content: null,
+      hasError: false,
+      errCode: null,
+    };
+    this.handleJoinMicrophone = this.handleJoinMicrophone.bind(this);
+  }
   componentDidMount() {
     const { processToggleMuteFromOutside } = this.props;
     if (Meteor.settings.public.allowOutsideCommands.toggleSelfVoice
@@ -48,7 +58,28 @@ class AudioControls extends PureComponent {
       window.addEventListener('message', processToggleMuteFromOutside);
     }
   }
+  handleJoinMicrophone() {
+    const {
+      joinMicrophone,
+    } = this.props;
 
+    const {
+      disableActions,
+    } = this.state;
+
+    if (disableActions) return;
+
+    this.setState({
+      hasError: false,
+      disableActions: true,
+    });
+
+    joinMicrophone().then(() => {
+      this.setState({
+        disableActions: false,
+      });
+    }).catch(this.handleGoToAudioOptions);
+  }
   render() {
     const {
       handleToggleMuteMicrophone,
@@ -99,7 +130,7 @@ class AudioControls extends PureComponent {
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
           // onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-          onClick={inAudio ? handleLeaveAudio : AudioManager.joinMicrophone()}
+          onClick={inAudio ? handleLeaveAudio : handleJoinMicrophone}
           disabled={disable}
           hideLabel
           aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
