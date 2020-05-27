@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
-
+import AudioManager from '/imports/ui/services/audio-manager';
 const intlMessages = defineMessages({
   joinAudio: {
     id: 'app.audio.joinAudio',
@@ -25,7 +25,6 @@ const intlMessages = defineMessages({
     description: 'Unmute audio button label',
   },
 });
-
 
 const propTypes = {
   processToggleMuteFromOutside: PropTypes.func.isRequired,
@@ -99,7 +98,8 @@ class AudioControls extends PureComponent {
           ) : null}
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
-          onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+          // onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+          onClick={inAudio ? handleLeaveAudio : AudioManager.joinMicrophone()}
           disabled={disable}
           hideLabel
           aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
