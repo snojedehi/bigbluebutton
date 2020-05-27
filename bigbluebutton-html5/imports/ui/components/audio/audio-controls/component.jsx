@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
-import AudioManager from '/imports/ui/services/audio-manager';
+
 const intlMessages = defineMessages({
   joinAudio: {
     id: 'app.audio.joinAudio',
@@ -41,16 +41,6 @@ const propTypes = {
 };
 
 class AudioControls extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: null,
-      hasError: false,
-      errCode: null,
-    };
-    this.handleJoinMicrophone = this.handleJoinMicrophone.bind(this);
-  }
   componentDidMount() {
     const { processToggleMuteFromOutside } = this.props;
     if (Meteor.settings.public.allowOutsideCommands.toggleSelfVoice
@@ -58,28 +48,7 @@ class AudioControls extends PureComponent {
       window.addEventListener('message', processToggleMuteFromOutside);
     }
   }
-  handleJoinMicrophone() {
-    const {
-      joinMicrophone,
-    } = this.props;
 
-    const {
-      disableActions,
-    } = this.state;
-
-    if (disableActions) return;
-
-    this.setState({
-      hasError: false,
-      disableActions: true,
-    });
-
-    joinMicrophone().then(() => {
-      this.setState({
-        disableActions: false,
-      });
-    }).catch(this.handleGoToAudioOptions);
-  }
   render() {
     const {
       handleToggleMuteMicrophone,
@@ -129,8 +98,7 @@ class AudioControls extends PureComponent {
           ) : null}
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
-          // onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-          onClick={inAudio ? handleLeaveAudio : handleJoinMicrophone}
+          onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
           disabled={disable}
           hideLabel
           aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
