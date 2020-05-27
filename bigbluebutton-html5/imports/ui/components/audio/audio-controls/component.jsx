@@ -6,6 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
+import AudioManager from '/imports/ui/services/audio-manager';
 
 const intlMessages = defineMessages({
   joinAudio: {
