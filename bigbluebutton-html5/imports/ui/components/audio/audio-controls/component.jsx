@@ -76,11 +76,7 @@ class AudioControls extends PureComponent {
     }
     var joinMicrophone =()=>{
       const call = new Promise((resolve, reject) => {
-        if (skipCheck) {
-          resolve(Service.joinMicrophone());
-        } else {
-          resolve(Service.transferCall());
-        }
+        resolve(Service.joinMicrophone());
         reject(() => {
           Service.exitAudio();
         });
