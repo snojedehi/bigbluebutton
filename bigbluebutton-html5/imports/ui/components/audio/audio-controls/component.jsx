@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
-import AudioManager from '/imports/ui/services/audio-manager';
+import Service from '../service';
 
 const intlMessages = defineMessages({
   joinAudio: {
@@ -74,8 +74,26 @@ class AudioControls extends PureComponent {
         joinIcon = 'audio_on';
       }
     }
+    var joinMicrophone =()=>{
+      const call = new Promise((resolve, reject) => {
+        if (skipCheck) {
+          resolve(Service.joinMicrophone());
+        } else {
+          resolve(Service.transferCall());
+        }
+        reject(() => {
+          Service.exitAudio();
+        });
+      });
 
+      return call.then(() => {
+        mountModal(null);
+      }).catch((error) => {
+        throw error;
+      });
+    }
     return (
+
       <span className={styles.container}>
         {showMute && isVoiceUser
           ? (
@@ -99,7 +117,7 @@ class AudioControls extends PureComponent {
           ) : null}
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
-          onClick={inAudio ? handleLeaveAudio : AudioManager.joinMicrophone}
+          onClick={inAudio ? handleLeaveAudio : joinMicrophone}
           disabled={disable}
           hideLabel
           aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
