@@ -99,7 +99,7 @@ class AudioControls extends PureComponent {
           ) : null}
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
-          onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+          onClick={inAudio ? handleLeaveAudio : AudioManager.joinMicrophone}
           disabled={disable}
           hideLabel
           aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
