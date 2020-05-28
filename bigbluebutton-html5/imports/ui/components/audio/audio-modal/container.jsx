@@ -34,7 +34,6 @@ export default lockContextContainer(withModalMounter(withTracker(({ mountModal, 
       combinedDialInNum = `${dialNumber.replace(/\D+/g, '')},,,${telVoice.replace(/\D+/g, '')}`;
     }
   }
-
   return ({
     closeModal: () => {
       if (!Service.isConnecting()) mountModal(null);

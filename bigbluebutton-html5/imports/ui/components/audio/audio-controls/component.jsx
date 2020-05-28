@@ -44,7 +44,7 @@ class AudioControls extends PureComponent {
   componentDidMount() {
     const { processToggleMuteFromOutside } = this.props;
     if (Meteor.settings.public.allowOutsideCommands.toggleSelfVoice
-      || getFromUserSettings('bbb_outside_toggle_self_voice', false)) {
+        || getFromUserSettings('bbb_outside_toggle_self_voice', false)) {
       window.addEventListener('message', processToggleMuteFromOutside);
     }
   }
@@ -75,45 +75,46 @@ class AudioControls extends PureComponent {
     }
 
     return (
-      <span className={styles.container}>
+        <span className={styles.container}>
         {showMute && isVoiceUser
-          ? (
-            <Button
-              className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
-              onClick={handleToggleMuteMicrophone}
+            ? (
+                <Button
+                    className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
+                    onClick={handleToggleMuteMicrophone}
+                    disabled={disable}
+                    hideLabel
+                    label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                        : intl.formatMessage(intlMessages.muteAudio)}
+                    aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                        : intl.formatMessage(intlMessages.muteAudio)}
+                    color={!muted ? 'primary' : 'default'}
+                    ghost={muted}
+                    // icon={muted ? 'mute' : 'unmute'}
+                    mycustomicon={muted? "fas fa-headset": "fas fa-microphone-alt-slash"}
+                    size="lg"
+                    circle
+                    accessKey={shortcuts.toggleMute}
+                />
+            ) : null}
+          <Button
+              className={cx(styles.button, inAudio || styles.btn)}
+              onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
               disabled={disable}
               hideLabel
-              label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                : intl.formatMessage(intlMessages.muteAudio)}
-              aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                : intl.formatMessage(intlMessages.muteAudio)}
-              color={!muted ? 'primary' : 'default'}
-              ghost={muted}
-              // icon={muted ? 'mute' : 'unmute'}
-              mycustomicon={muted? "fas fa-headset": "fas fa-microphone-alt-slash"}
+              aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+                  : intl.formatMessage(intlMessages.joinAudio)}
+              label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+                  : intl.formatMessage(intlMessages.joinAudio)}
+              color={inAudio ? 'primary' : 'default'}
+              ghost={!inAudio}
+              mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
               size="lg"
               circle
-              accessKey={shortcuts.toggleMute}
-            />
-          ) : null}
-        <Button
-          className={cx(styles.button, inAudio || styles.btn)}
-          onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-          disabled={disable}
-          hideLabel
-          aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-            : intl.formatMessage(intlMessages.joinAudio)}
-          label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-            : intl.formatMessage(intlMessages.joinAudio)}
-          color={inAudio ? 'primary' : 'default'}
-          ghost={!inAudio}
-          mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
-          size="lg"
-          circle
-          accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
-        />
+              accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
+          />
       </span>);
   }
+
 }
 
 AudioControls.propTypes = propTypes;
