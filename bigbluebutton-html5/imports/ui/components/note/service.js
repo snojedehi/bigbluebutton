@@ -49,6 +49,7 @@ const isLocked = () => {
   return false;
 };
 
+
 const getReadOnlyURL = () => {
   const readOnlyNoteId = getReadOnlyNoteId();
   const url = Auth.authenticateURL(`${NOTE_CONFIG.url}/p/${readOnlyNoteId}`);
