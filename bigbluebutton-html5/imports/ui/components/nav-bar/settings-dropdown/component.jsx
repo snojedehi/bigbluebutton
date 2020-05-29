@@ -238,6 +238,9 @@ class SettingsDropdown extends PureComponent {
 
       <RecordingIndicator
           key={_.uniqueId('list-recording-')}
+          icon="settings"
+          label="RecordingIndicator"
+          description="RecordingIndicator"
           mountModal={mountModal}
           amIModerator={amIModerator}
       />,
