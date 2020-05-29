@@ -104,7 +104,7 @@ package org.bigbluebutton.main.model.modules
 
 		public function portTestFailed(e:PortTestEvent):void {
 			if (!e.tunnel) {
-				if (e.hostname == getPortTestHost() && !StringUtils.isEmpty(getPortTestAlternateHost()) && getPortTestAlternateHost() != getPortTestHost()) {
+				if (e.hostname == getPortTestHost() && !StringUtils.isEmpty(getPortTestAlternateHost())) {
 					// try the alternate host
 					portTestProxy.connect(false /*tunnel*/, getPortTestAlternateHost(), "", getPortTestApplication(), getPortTestTimeout());
 				} else {

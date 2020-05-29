@@ -68,7 +68,7 @@ package org.bigbluebutton.modules.screenshare.utils
       // if its firefox go ahead and let webrtc handle it
       if (BrowserCheck.isFirefox()) {
         if (Capabilities.os.indexOf("Mac") >= 0) {
-          cannotUseWebRTC("Recommend using Chrome for better screensharing");
+          cannotUseWebRTC("Firefox on Mac performs poorly fallback to Java");
         } else {
           webRTCWorksAndConfigured("Firefox, lets try");
         }
@@ -79,13 +79,13 @@ package org.bigbluebutton.modules.screenshare.utils
         // We only need to check for the extension for Chrome versions before 72
         if (BrowserCheck.browserMajorVersion < '72') {
           WebRTCScreenshareUtility.extensionLink = options.chromeExtensionLink;
-
+        
           // if theres no extension link-- users cant download-- fail
           if (StringUtils.isEmpty(options.chromeExtensionLink) || StringUtils.equalsIgnoreCase(options.chromeExtensionLink, "LINK")) {
             cannotUseWebRTC("No extensionLink in config.xml");
             return;
           }
-
+        
           WebRTCScreenshareUtility.chromeExtensionKey = options.chromeExtensionKey;
 
           // if theres no key we cannot connect to the extension-- fail
@@ -114,7 +114,7 @@ package org.bigbluebutton.modules.screenshare.utils
         // check if the extension exists
         ExternalInterface.call("checkChromeExtInstalled", "onSuccess", WebRTCScreenshareUtility.chromeExtensionKey);
       } else if (BrowserCheck.isEdge()) {
-        cannotUseWebRTC("Edge WebRTC screenshare is not currently supported");
+        webRTCWorksAndConfigured("Edge, lets try");
       } else {
         cannotUseWebRTC("Web browser doesn't support WebRTC");
         return;

@@ -1,4 +1,4 @@
-﻿/**
+﻿﻿/**
 * BigBlueButton open source conferencing system - http://www.bigbluebutton.org/
 * 
 * Copyright (c) 2012 BigBlueButton Inc. and by respective authors (see below).
@@ -179,13 +179,6 @@ package org.bigbluebutton.main.model
 			} catch( e : ArgumentError ) {
 				// Invalid parameters.
 				status = "ERROR: " + e.message;
-				
-				var logData2:Object = UsersUtil.initLogData();
-				logData2.uri = this.baseURI;
-				logData2.tags = ["initialization", "port-test", "connection"];
-				logData2.logCode = "port_test_connect_error";
-				logData2.message = e.message;
-				LOGGER.error(JSON.stringify(logData2));
 			}	
 		}
 		
@@ -256,7 +249,7 @@ package org.bigbluebutton.main.model
 
         if ( statusCode == "NetConnection.Connect.Success" ) {
             status = "SUCCESS";
-            logData.uri = this.baseURI;
+						logData.uri = this.baseURI;
             logData.logCode = "port_test_connected";
             LOGGER.info(JSON.stringify(logData));
 
@@ -264,18 +257,14 @@ package org.bigbluebutton.main.model
         } else if ( statusCode == "NetConnection.Connect.Rejected" ||
                     statusCode == "NetConnection.Connect.Failed" || 
                     statusCode == "NetConnection.Connect.Closed" ) {
-            logData.statusCode = statusCode;
-            logData.uri = this.baseURI;
-            logData.logCode = "port_test_connect_failed";
+            logData.statusCode = statusCode;            
+						logData.uri = this.baseURI;
+						logData.logCode = "port_test_connect_failed";
             LOGGER.info(JSON.stringify(logData));
 
             status = "FAILED";
             _connectionListener(status, tunnel, hostname, port, application);
-        } else {
-            logData.statusCode = statusCode;
-            logData.uri = this.baseURI;
-            logData.logCode = "port_test_connect_unknown_status";
-            LOGGER.info(JSON.stringify(logData));
+            
         }
         
         closeConnection();

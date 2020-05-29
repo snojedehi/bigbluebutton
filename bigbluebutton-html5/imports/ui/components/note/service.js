@@ -39,7 +39,6 @@ const getNoteParams = () => {
   return params.join('&');
 };
 
-
 const isLocked = () => {
   const meeting = Meetings.findOne({ meetingId: Auth.meetingID }, { fields: { 'lockSettingsProps.disableNote': 1 } });
   const user = Users.findOne({ userId: Auth.userID }, { fields: { locked: 1, role: 1 } });
@@ -49,8 +48,6 @@ const isLocked = () => {
   }
   return false;
 };
-
-
 
 const getReadOnlyURL = () => {
   const readOnlyNoteId = getReadOnlyNoteId();
