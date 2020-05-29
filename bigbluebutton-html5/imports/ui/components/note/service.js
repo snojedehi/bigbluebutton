@@ -40,6 +40,7 @@ const getNoteParams = () => {
 };
 
 
+
 const isLocked = () => {
   const meeting = Meetings.findOne({ meetingId: Auth.meetingID }, { fields: { 'lockSettingsProps.disableNote': 1 } });
   const user = Users.findOne({ userId: Auth.userID }, { fields: { locked: 1, role: 1 } });
