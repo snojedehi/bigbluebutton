@@ -226,7 +226,7 @@ class SettingsDropdown extends PureComponent {
     const shouldRenderLogoutOption = (isMeteorConnected && allowLogoutSetting)
       ? logoutOption
       : null;
-    const record=()=>{
+    const record=(mountModal,amIModerator)=>{
       return(
           <RecordingIndicator
               mountModal={mountModal}
@@ -236,7 +236,7 @@ class SettingsDropdown extends PureComponent {
     }
     return _.compact([
 
-      record(),
+      record(mountModal,amIModerator),
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
       this.getFullscreenItem(),
       (<DropdownListItem
