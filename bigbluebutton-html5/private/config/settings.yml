@@ -7,12 +7,12 @@ public:
     listenOnlyMode: true
     forceListenOnly: false
     skipCheck: false
-    clientTitle: BigBlueButton
-    appName: BigBlueButton HTML5 Client
+    clientTitle: Classzabanm
+    appName: Classzabanm HTML5 Client
     bbbServerVersion: 2.2
-    copyright: "©2019 BigBlueButton Inc."
+    copyright: "©2019 Classzabanm Inc."
     html5ClientBuild: HTML5_CLIENT_VERSION
-    helpLink: https://bigbluebutton.org/html5/
+    helpLink: https://Classzabanm.com/
     lockOnJoin: true
     cdn: ""
     basename: "/html5client"
