@@ -38,11 +38,13 @@ function noop(error) {
         logger.error(error);
 }
 function trackStop(track) {
-    track.stop && track.stop();
+    track && track.stop && track.stop();
 }
 function streamStop(stream) {
-    stream.getTracks().forEach(trackStop);
+    let track = stream.track;
+    trackStop(track);
 }
+
 var dumpSDP = function (description) {
     if (typeof description === 'undefined' || description === null) {
         return '';
@@ -67,7 +69,9 @@ function bufferizeCandidates(pc, onerror) {
             break;
         case 'stable':
             if (pc.remoteDescription) {
-                pc.addIceCandidate(candidate, callback, callback);
+                pc.addIceCandidate(candidate).then(callback).catch(err => {
+                    callback(err);
+                });
                 break;
             }
         default:
@@ -228,7 +232,7 @@ function WebRtcPeer(mode, options, callback) {
                 candidategatheringdone = true;
         }
     });
-    pc.ontrack = options.onaddstream;
+    pc.onaddtrack = options.onaddstream;
     pc.onnegotiationneeded = options.onnegotiationneeded;
     this.on('newListener', function (event, listener) {
         if (event === 'icecandidate' || event === 'candidategatheringdone') {
@@ -248,7 +252,7 @@ function WebRtcPeer(mode, options, callback) {
         } else {
             candidate = new RTCIceCandidate(iceCandidate);
         }
-        logger.debug('Remote ICE candidate received', iceCandidate);
+        // logger.debug('Remote ICE candidate received', iceCandidate);
         callback = (callback || noop).bind(this);
         addIceCandidate(candidate, callback);
     };
@@ -265,14 +269,14 @@ function WebRtcPeer(mode, options, callback) {
                 offerToReceiveVideo: mode !== 'sendonly' && offerVideo
             };
         var constraints = browserDependantConstraints;
-        logger.debug('constraints: ' + JSON.stringify(constraints));
+        // logger.debug('constraints: ' + JSON.stringify(constraints));
         pc.createOffer(constraints).then(function (offer) {
-            logger.debug('Created SDP offer');
+            // logger.debug('Created SDP offer');
             offer = mangleSdpToAddSimulcast(offer);
             return pc.setLocalDescription(offer);
         }).then(function () {
             var localDescription = pc.localDescription;
-            logger.debug('Local description set', localDescription.sdp);
+            // logger.debug('Local description set', localDescription.sdp);
             if (multistream && usePlanB) {
                 localDescription = interop.toUnifiedPlan(localDescription);
                 logger.debug('offer::origPlanB->UnifiedPlan', dumpSDP(localDescription));
@@ -287,13 +291,31 @@ function WebRtcPeer(mode, options, callback) {
         return pc.remoteDescription;
     };
     function setRemoteVideo() {
-        if (remoteVideo) {
-            var stream = pc.getRemoteStreams()[0];
-            remoteVideo.pause();
-            remoteVideo.srcObject = stream;
-            remoteVideo.load();
-            logger.info('Remote URL:', remoteVideo.srcObject);
+      if (remoteVideo) {
+        // TODO review the retry - prlanzarin 08/18
+        let played = false;
+        const MAX_RETRIES = 5;
+        let attempt = 0;
+        const playVideo = () => {
+          if (!played && attempt < MAX_RETRIES) {
+            remoteVideo.play().catch(e => {
+                attempt++;
+                playVideo(remoteVideo);
+            }).then(() => { remoteVideo.muted = false; played = true; attempt = 0;});
+          }
         }
+
+        let stream = self.getRemoteStream();
+
+        remoteVideo.oncanplaythrough = function() {
+          playVideo();
+        };
+
+        remoteVideo.pause();
+        remoteVideo.srcObject = stream;
+        remoteVideo.load();
+        logger.info('Remote URL:', remoteVideo.srcObject);
+      }
     }
     this.showLocalVideo = function () {
         localVideo.srcObject = videoStream;
@@ -317,14 +339,14 @@ function WebRtcPeer(mode, options, callback) {
             logger.debug('asnwer::planB', dumpSDP(planBAnswer));
             answer = planBAnswer;
         }
-        logger.debug('SDP answer received, setting remote description');
+        // logger.debug('SDP answer received, setting remote description');
         if (pc.signalingState === 'closed') {
             return callback('PeerConnection is closed');
         }
-        pc.setRemoteDescription(answer, function () {
+        pc.setRemoteDescription(answer).then(function () {
             setRemoteVideo();
             callback();
-        }, callback);
+        }).catch(callback);
     };
     this.processOffer = function (sdpOffer, callback) {
         callback = callback.bind(this);
@@ -337,7 +359,7 @@ function WebRtcPeer(mode, options, callback) {
             logger.debug('offer::planB', dumpSDP(planBOffer));
             offer = planBOffer;
         }
-        logger.debug('SDP offer received, setting remote description');
+        // logger.debug('SDP offer received, setting remote description');
         if (pc.signalingState === 'closed') {
             return callback('PeerConnection is closed');
         }
@@ -347,7 +369,7 @@ function WebRtcPeer(mode, options, callback) {
             return pc.createAnswer();
         }).then(function (answer) {
             answer = mangleSdpToAddSimulcast(answer);
-            logger.debug('Created SDP answer');
+            // logger.debug('Created SDP answer');
             return pc.setLocalDescription(answer);
         }).then(function () {
             var localDescription = pc.localDescription;
@@ -355,7 +377,7 @@ function WebRtcPeer(mode, options, callback) {
                 localDescription = interop.toUnifiedPlan(localDescription);
                 logger.debug('answer::origPlanB->UnifiedPlan', dumpSDP(localDescription));
             }
-            logger.debug('Local description set', localDescription.sdp);
+            // logger.debug('Local description set', localDescription.sdp);
             callback(null, localDescription.sdp);
         }).catch(callback);
     };
@@ -381,10 +403,10 @@ function WebRtcPeer(mode, options, callback) {
             self.showLocalVideo();
         }
         if (videoStream) {
-            pc.addStream(videoStream);
+            videoStream.getTracks().forEach(track => pc.addTrack(track, videoStream));
         }
         if (audioStream) {
-            pc.addStream(audioStream);
+            audioStream.getTracks().forEach(track => pc.addTrack(track, audioStream));
         }
         var browser = parser.getBrowser();
         if (mode === 'sendonly' && (browser.name === 'Chrome' || browser.name === 'Chromium') && browser.major === 39) {
@@ -424,7 +446,7 @@ function WebRtcPeer(mode, options, callback) {
                     navigator.getDisplayMedia(recursive.apply(undefined, constraints))
                         .then(gDMCallback)
                         .catch(callback);
-                } else if (navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function') {
+                } else if (typeof navigator.mediaDevices.getDisplayMedia === 'function') {
                     navigator.mediaDevices.getDisplayMedia(recursive.apply(undefined, constraints))
                         .then(gDMCallback)
                         .catch(callback);
@@ -462,23 +484,28 @@ function createEnableDescriptor(type) {
         get: function () {
             if (!this.peerConnection)
                 return;
-            var streams = this.peerConnection.getLocalStreams();
-            if (!streams.length)
+
+            var senders = this.peerConnection.getSenders();
+            if (!senders.length)
                 return;
-            for (var i = 0, stream; stream = streams[i]; i++) {
-                var tracks = stream[method]();
-                for (var j = 0, track; track = tracks[j]; j++)
-                    if (!track.enabled)
-                        return false;
-            }
+
+            senders.forEach(sender => {
+                let track = sender.track;
+                if (!track.enabled && track.kind === type) {
+                    return false;
+                }
+            });
             return true;
         },
         set: function (value) {
             function trackSetEnable(track) {
                 track.enabled = value;
             }
-            this.peerConnection.getLocalStreams().forEach(function (stream) {
-                stream[method]().forEach(trackSetEnable);
+            this.peerConnection.getSenders().forEach(function (stream) {
+                let track = stream.track;
+                if (track.kind === type) {
+                    trackSetEnable(track);
+                }
             });
         }
     };
@@ -496,18 +523,46 @@ Object.defineProperties(WebRtcPeer.prototype, {
     'audioEnabled': createEnableDescriptor('Audio'),
     'videoEnabled': createEnableDescriptor('Video')
 });
-WebRtcPeer.prototype.getLocalStream = function (index) {
-    if (this.peerConnection) {
-        return this.peerConnection.getLocalStreams()[index || 0];
-    }
+WebRtcPeer.prototype.getLocalStream = function () {
+  if (this.localStream) {
+    return this.localStream;
+  }
+
+  if (this.peerConnection) {
+    this.localStream = new MediaStream();
+    this.peerConnection.getSenders().forEach((ls) => {
+      let track = ls.track;
+      if (track && !track.muted) {
+        this.localStream.addTrack(track);
+      }
+    });
+    return this.localStream;
+  }
 };
-WebRtcPeer.prototype.getRemoteStream = function (index) {
-    if (this.peerConnection) {
-        return this.peerConnection.getRemoteStreams()[index || 0];
-    }
+WebRtcPeer.prototype.getRemoteStream = function () {
+  if (this.remoteStream) {
+    return this.remoteStream;
+  }
+
+  if (this.peerConnection) {
+    this.remoteStream = new MediaStream();
+    this.peerConnection.getReceivers().forEach((rs) => {
+      let track = rs.track;
+      if (track) {
+        if (track.muted) {
+          track.onunmute = () => {
+            this.remoteStream.addTrack(track);
+          };
+          return;
+        }
+        this.remoteStream.addTrack(track);
+      }
+    });
+    return this.remoteStream;
+  }
 };
 WebRtcPeer.prototype.dispose = function () {
-    logger.debug('Disposing WebRtcPeer');
+    // logger.debug('Disposing WebRtcPeer');
     var pc = this.peerConnection;
     var dc = this.dataChannel;
     try {
@@ -519,7 +574,13 @@ WebRtcPeer.prototype.dispose = function () {
         if (pc) {
             if (pc.signalingState === 'closed')
                 return;
-            pc.getLocalStreams().forEach(streamStop);
+            pc.getSenders().forEach(streamStop);
+            if (this.remoteStream) {
+                this.remoteStream = null;
+            }
+            if (this.localStream) {
+                this.localStream = null;
+            }
             pc.close();
         }
     } catch (err) {
