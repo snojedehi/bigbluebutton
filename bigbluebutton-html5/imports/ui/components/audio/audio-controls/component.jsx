@@ -91,7 +91,7 @@ class AudioControls extends PureComponent {
     }
     return (
         <span className={styles.container}>
-        {(showMute && isVoiceUser) || inAudio
+        {(showMute && isVoiceUser)
           ? (
             <Button
               className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
@@ -111,6 +111,26 @@ class AudioControls extends PureComponent {
               accessKey={shortcuts.toggleMute}
             />
           ) : null}
+          {inAudio && !(showMute && isVoiceUser)
+              ? (
+                  <Button
+                      className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
+                      onClick={joinMicrophone}
+                      disabled={disable}
+                      hideLabel
+                      label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                          : intl.formatMessage(intlMessages.muteAudio)}
+                      aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                          : intl.formatMessage(intlMessages.muteAudio)}
+                      color={!muted ? 'primary' : 'default'}
+                      ghost={muted}
+                      // icon={muted ? 'mute' : 'unmute'}
+                      mycustomicon="fas fa-headset"
+                      size="lg"
+                      circle
+                      accessKey={shortcuts.toggleMute}
+                  />
+              ) : null}
         <Button
           className={cx(styles.button, inAudio || styles.btn)}
           onClick={inAudio ? handleLeaveAudio : joinMicrophone}
