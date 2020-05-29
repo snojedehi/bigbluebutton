@@ -235,15 +235,16 @@ class SettingsDropdown extends PureComponent {
       )
     }
     return _.compact([
-
-      <RecordingIndicator
-          key={_.uniqueId('list-recording-')}
-          icon="settings"
-          label="RecordingIndicator"
-          description="RecordingIndicator"
-          mountModal={mountModal}
-          amIModerator={amIModerator}
-      />,
+      (<DropdownListItem
+          key="list-item-recording"
+          label={<RecordingIndicator
+              mountModal={mountModal}
+              amIModerator={amIModerator}
+          />}
+          description=""
+          onClick={}
+      />)
+      ,
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
       this.getFullscreenItem(),
       (<DropdownListItem
