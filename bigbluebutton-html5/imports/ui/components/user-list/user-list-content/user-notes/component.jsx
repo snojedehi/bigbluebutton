@@ -94,7 +94,7 @@ class UserNotes extends Component {
           <div>
             {intl.formatMessage(intlMessages.sharedNotes)}
           </div>
-          {!disableNote
+          {disableNote
             ? (
               <div className={styles.noteLock}>
                 <Icon iconName="lock" />
@@ -110,9 +110,9 @@ class UserNotes extends Component {
 
   render() {
     const { intl, disableNote } = this.props;
-
+    alert(1)
     if (!NoteService.isEnabled()) return null;
-
+    alert(2)
     return (
       <div className={styles.messages}>
         <div className={styles.container}>
