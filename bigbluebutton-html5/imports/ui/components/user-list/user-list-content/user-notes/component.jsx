@@ -94,7 +94,7 @@ class UserNotes extends Component {
           <div>
             {intl.formatMessage(intlMessages.sharedNotes)}
           </div>
-          {disableNote
+          {!disableNote
             ? (
               <div className={styles.noteLock}>
                 <Icon iconName="lock" />
