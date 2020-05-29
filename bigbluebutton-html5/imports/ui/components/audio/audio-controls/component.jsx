@@ -122,7 +122,7 @@ class AudioControls extends PureComponent {
             : intl.formatMessage(intlMessages.joinAudio)}
           color={inAudio ? 'primary' : 'default'}
           ghost={!inAudio}
-          mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
+          mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headset"}
           size="lg"
           circle
           accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
