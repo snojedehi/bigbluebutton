@@ -99,8 +99,8 @@ class NavBar extends PureComponent {
               hideLabel
               label={intl.formatMessage(intlMessages.toggleUserListLabel)}
               aria-label={ariaLabel}
-              icon="user"
-              className={cx(toggleBtnClasses)}
+              // icon="user"
+              mycustomicon="fas fa-id-card-alt"
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
             />
