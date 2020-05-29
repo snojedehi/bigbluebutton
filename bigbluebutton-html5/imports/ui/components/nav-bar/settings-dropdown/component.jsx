@@ -236,7 +236,11 @@ class SettingsDropdown extends PureComponent {
     }
     return _.compact([
 
-      record(mountModal,amIModerator),
+      <RecordingIndicator
+          key={_.uniqueId('list-recording-')}
+          mountModal={mountModal}
+          amIModerator={amIModerator}
+      />,
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
       this.getFullscreenItem(),
       (<DropdownListItem
