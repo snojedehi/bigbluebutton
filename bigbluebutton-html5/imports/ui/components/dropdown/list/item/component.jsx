@@ -57,8 +57,8 @@ export default class DropdownListItem extends Component {
         role="menuitem"
         data-test={this.props['data-test']}
       >
-        {
-          children || this.renderDefault()
+        {!content ?
+          children || this.renderDefault():null
         }
         {
           label && ! content?
