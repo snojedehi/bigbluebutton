@@ -242,7 +242,6 @@ class SettingsDropdown extends PureComponent {
               amIModerator={amIModerator}
           />}
           description=""
-          onClick={}
       />)
       ,
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
