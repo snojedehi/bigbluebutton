@@ -84,7 +84,7 @@ class AudioControls extends PureComponent {
 
 
       return call.then(() => {
-        mountModal(null);
+        // mountModal(null);
       }).catch((error) => {
         throw error;
       });
