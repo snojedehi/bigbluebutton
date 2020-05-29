@@ -91,7 +91,7 @@ class AudioControls extends PureComponent {
     }
     return (
         <span className={styles.container}>
-        {showMute && isVoiceUser && inAudio
+        {(showMute && isVoiceUser) || inAudio
           ? (
             <Button
               className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
