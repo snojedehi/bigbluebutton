@@ -228,11 +228,9 @@ class SettingsDropdown extends PureComponent {
       : null;
     const record=()=>{
       return(
-          <DropdownListItem
-              key="list-item-fullscreen2"
-              icon="settings"
-              label="ss"
-              description="ss"
+          <RecordingIndicator
+              mountModal={mountModal}
+              amIModerator={amIModerator}
           />
       )
     }
