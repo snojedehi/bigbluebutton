@@ -237,7 +237,7 @@ class SettingsDropdown extends PureComponent {
     return _.compact([
       (<DropdownListItem
           key="list-item-recording"
-          label={<RecordingIndicator
+          content={<RecordingIndicator
               mountModal={mountModal}
               amIModerator={amIModerator}
           />}
