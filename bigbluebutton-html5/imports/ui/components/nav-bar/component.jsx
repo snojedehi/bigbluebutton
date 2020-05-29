@@ -101,7 +101,7 @@ class NavBar extends PureComponent {
               aria-label={ariaLabel}
               // icon="user"
               mycustomicon="fas fa-user-graduate"
-              color="#fff900"
+              color="success"
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
             />
