@@ -558,7 +558,6 @@ class UserDropdown extends PureComponent {
         3: user.emoji,
       },
     );
-
     const contents = (
       <div
         data-test={isMe(user.userId) ? 'userListItemCurrent' : null}
