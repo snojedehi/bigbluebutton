@@ -115,7 +115,7 @@ class NavBar extends PureComponent {
             />
           </div>
           <div className={styles.right}>
-            <SettingsDropdownContainer amIModerator={amIModerator} />
+            <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />
           </div>
         </div>
         <div className={styles.bottom}>
