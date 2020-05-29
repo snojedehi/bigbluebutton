@@ -467,6 +467,7 @@ class UserDropdown extends PureComponent {
     }
   }
 
+
   /**
   * Check if the dropdown is visible and is opened by the user
   *
