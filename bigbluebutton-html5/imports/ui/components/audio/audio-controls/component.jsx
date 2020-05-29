@@ -6,6 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
+import Service from '../service';
 
 const intlMessages = defineMessages({
   joinAudio: {
@@ -73,45 +74,59 @@ class AudioControls extends PureComponent {
         joinIcon = 'audio_on';
       }
     }
+    var joinMicrophone =()=>{
+      const call = new Promise((resolve, reject) => {
+        resolve(Service.joinMicrophone());
+        reject(() => {
+          Service.exitAudio();
+        });
+      });
 
+
+      return call.then(() => {
+        mountModal(null);
+      }).catch((error) => {
+        throw error;
+      });
+    }
     return (
         <span className={styles.container}>
         {showMute && isVoiceUser
-            ? (
-                <Button
-                    className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
-                    onClick={handleToggleMuteMicrophone}
-                    disabled={disable}
-                    hideLabel
-                    label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                        : intl.formatMessage(intlMessages.muteAudio)}
-                    aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                        : intl.formatMessage(intlMessages.muteAudio)}
-                    color={!muted ? 'primary' : 'default'}
-                    ghost={muted}
-                    // icon={muted ? 'mute' : 'unmute'}
-                    mycustomicon={muted? "fas fa-headset": "fas fa-microphone-alt-slash"}
-                    size="lg"
-                    circle
-                    accessKey={shortcuts.toggleMute}
-                />
-            ) : null}
-          <Button
-              className={cx(styles.button, inAudio || styles.btn)}
-              onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+          ? (
+            <Button
+              className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
+              onClick={handleToggleMuteMicrophone}
               disabled={disable}
               hideLabel
-              aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-                  : intl.formatMessage(intlMessages.joinAudio)}
-              label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-                  : intl.formatMessage(intlMessages.joinAudio)}
-              color={inAudio ? 'primary' : 'default'}
-              ghost={!inAudio}
-              mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
+              label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                : intl.formatMessage(intlMessages.muteAudio)}
+              aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                : intl.formatMessage(intlMessages.muteAudio)}
+              color={!muted ? 'primary' : 'default'}
+              ghost={muted}
+              // icon={muted ? 'mute' : 'unmute'}
+              mycustomicon={muted? "fas fa-headset": "fas fa-microphone-alt-slash"}
               size="lg"
               circle
-              accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
-          />
+              accessKey={shortcuts.toggleMute}
+            />
+          ) : null}
+        <Button
+          className={cx(styles.button, inAudio || styles.btn)}
+          onClick={inAudio ? handleLeaveAudio : joinMicrophone}
+          disabled={disable}
+          hideLabel
+          aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+            : intl.formatMessage(intlMessages.joinAudio)}
+          label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+            : intl.formatMessage(intlMessages.joinAudio)}
+          color={inAudio ? 'primary' : 'default'}
+          ghost={!inAudio}
+          mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
+          size="lg"
+          circle
+          accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
+        />
       </span>);
   }
 
