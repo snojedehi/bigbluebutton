@@ -286,6 +286,7 @@
 
   &.success {
     @include button-ghost-variant(var(--btn-success-bg), var(--btn-success-color));
+    background-color: #cccccc;
   }
 
   &.danger {

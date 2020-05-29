@@ -211,6 +211,7 @@ export default class Button extends BaseButton {
       icon: iconName,
       customIcon,
       mycustomicon,
+      color,
     } = this.props;
 
     if (iconName) {
@@ -219,7 +220,7 @@ export default class Button extends BaseButton {
       return customIcon;
     }
     if (mycustomicon) {
-      return (<i className={mycustomicon}></i>);
+      return (<i className={mycustomicon} color={color}></i>);
     }
     return null;
   }

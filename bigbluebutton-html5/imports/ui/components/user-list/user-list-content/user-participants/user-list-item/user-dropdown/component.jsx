@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { defineMessages } from 'react-intl';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
@@ -10,16 +10,10 @@ import DropdownContent from '/imports/ui/components/dropdown/content/component';
 import DropdownList from '/imports/ui/components/dropdown/list/component';
 import DropdownListItem from '/imports/ui/components/dropdown/list/item/component';
 import DropdownListSeparator from '/imports/ui/components/dropdown/list/separator/component';
-import lockContextContainer from '/imports/ui/components/lock-viewers/context/container';
-import { withModalMounter } from '/imports/ui/components/modal/service';
-import Modal from '/imports/ui/components/modal/simple/component';
-import Button from '/imports/ui/components/button/component';
-
 import _ from 'lodash';
-import { Session } from 'meteor/session';
 import { styles } from './styles';
-import UserName from '../user-name/component';
-import UserIcons from '../user-icons/component';
+import UserName from './../user-name/component';
+import UserIcons from './../user-icons/component';
 
 const messages = defineMessages({
   presenter: {
@@ -62,13 +56,9 @@ const messages = defineMessages({
     id: 'app.userList.menu.clearStatus.label',
     description: 'Clear the emoji status of this user',
   },
-  takePresenterLabel: {
-    id: 'app.actionsBar.actionsDropdown.takePresenter',
-    description: 'Set this user to be the presenter in this meeting',
-  },
-  makePresenterLabel: {
+  MakePresenterLabel: {
     id: 'app.userList.menu.makePresenter.label',
-    description: 'label to make another user presenter',
+    description: 'Set this user to be the presenter in this meeting',
   },
   RemoveUserLabel: {
     id: 'app.userList.menu.removeUser.label',
@@ -90,34 +80,6 @@ const messages = defineMessages({
     id: 'app.userList.menu.demoteUser.label',
     description: 'Forcefully demote this moderator to a viewer',
   },
-  UnlockUserLabel: {
-    id: 'app.userList.menu.unlockUser.label',
-    description: 'Unlock individual user',
-  },
-  LockUserLabel: {
-    id: 'app.userList.menu.lockUser.label',
-    description: 'Lock a unlocked user',
-  },
-  DirectoryLookupLabel: {
-    id: 'app.userList.menu.directoryLookup.label',
-    description: 'Directory lookup',
-  },
-  yesLabel: {
-    id: 'app.endMeeting.yesLabel',
-    description: 'confirm button label',
-  },
-  noLabel: {
-    id: 'app.endMeeting.noLabel',
-    description: 'cancel confirm button label',
-  },
-  removeConfirmTitle: {
-    id: 'app.userList.menu.removeConfirmation.label',
-    description: 'title for remove user confirmation modal',
-  },
-  removeConfirmDesc: {
-    id: 'app.userlist.menu.removeConfirmation.desc',
-    description: 'description for remove user confirmation',
-  },
 });
 
 const propTypes = {
@@ -127,14 +89,12 @@ const propTypes = {
     formatMessage: PropTypes.func.isRequired,
   }).isRequired,
   normalizeEmojiName: PropTypes.func.isRequired,
-  isThisMeetingLocked: PropTypes.bool.isRequired,
+  meeting: PropTypes.shape({}).isRequired,
+  isMeetingLocked: PropTypes.func.isRequired,
   getScrollContainerRef: PropTypes.func.isRequired,
-  toggleUserLock: PropTypes.func.isRequired,
 };
-const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
-const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
-class UserDropdown extends PureComponent {
+class UserDropdown extends Component {
   /**
    * Return true if the content fit on the screen, false otherwise.
    *
@@ -171,15 +131,182 @@ class UserDropdown extends PureComponent {
     this.seperator = _.uniqueId('action-separator-');
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.isActionsOpen && this.state.showNestedOptions) {
+      return this.resetMenuState();
+    }
+
     this.checkDropdownDirection();
   }
 
+  makeDropdownItem(key, label, onClick, icon = null, iconRight = null) {
+    return (
+      <DropdownListItem
+        {...{
+          key,
+          label,
+          onClick,
+          icon,
+          iconRight,
+        }}
+        className={key === this.props.getEmoji ? styles.emojiSelected : null}
+      />
+    );
+  }
+
+  resetMenuState() {
+    return this.setState({
+      isActionsOpen: false,
+      dropdownOffset: 0,
+      dropdownDirection: 'top',
+      dropdownVisible: false,
+      showNestedOptions: false,
+    });
+  }
+
+  getUsersActions() {
+    const {
+      intl,
+      currentUser,
+      user,
+      router,
+      isBreakoutRoom,
+      getAvailableActions,
+      handleEmojiChange,
+      getEmojiList,
+      setEmojiStatus,
+      assignPresenter,
+      removeUser,
+      toggleVoice,
+      changeRole,
+    } = this.props;
+
+    const actionPermissions = getAvailableActions(currentUser, user, router, isBreakoutRoom);
+    const actions = [];
+
+    const {
+      allowedToChatPrivately,
+      allowedToMuteAudio,
+      allowedToUnmuteAudio,
+      allowedToResetStatus,
+      allowedToRemove,
+      allowedToSetPresenter,
+      allowedToPromote,
+      allowedToDemote,
+      allowedToChangeStatus,
+    } = actionPermissions;
+
+    if (this.state.showNestedOptions) {
+      if (allowedToChangeStatus) {
+        actions.push(this.makeDropdownItem(
+          'back',
+          intl.formatMessage(messages.backTriggerLabel),
+          () => this.setState({ showNestedOptions: false, isActionsOpen: true }),
+          'left_arrow',
+        ));
+      }
+
+      actions.push(<DropdownListSeparator key={_.uniqueId('list-separator-')} />);
+
+      const statuses = Object.keys(getEmojiList);
+      statuses.map(status => actions.push(this.makeDropdownItem(
+        status,
+        intl.formatMessage({ id: `app.actionsBar.emojiMenu.${status}Label` }),
+        () => { handleEmojiChange(status); this.resetMenuState(); },
+        getEmojiList[status],
+      )));
+
+      return actions;
+    }
+
+    if (allowedToChangeStatus) {
+      actions.push(this.makeDropdownItem(
+        'setstatus',
+        intl.formatMessage(messages.statusTriggerLabel),
+        () => this.setState({ showNestedOptions: true, isActionsOpen: true }),
+        'user',
+        'right_arrow',
+      ));
+    }
+
+    if (allowedToChatPrivately) {
+      actions.push(this.makeDropdownItem(
+        'openChat',
+        intl.formatMessage(messages.ChatLabel),
+        () => this.onActionsHide(router.push(`/users/chat/${user.id}`)),
+        'chat',
+      ));
+    }
+
+    if (allowedToResetStatus && user.emoji.status !== 'none') {
+      actions.push(this.makeDropdownItem(
+        'clearStatus',
+        intl.formatMessage(messages.ClearStatusLabel),
+        () => this.onActionsHide(setEmojiStatus(user.id, 'none')),
+        'clear_status',
+      ));
+    }
+
+    if (allowedToMuteAudio) {
+      actions.push(this.makeDropdownItem(
+        'mute',
+        intl.formatMessage(messages.MuteUserAudioLabel),
+        () => this.onActionsHide(toggleVoice(user.id)),
+        'mute',
+      ));
+    }
+
+    if (allowedToUnmuteAudio) {
+      actions.push(this.makeDropdownItem(
+        'unmute',
+        intl.formatMessage(messages.UnmuteUserAudioLabel),
+        () => this.onActionsHide(toggleVoice(user.id)),
+        'unmute',
+      ));
+    }
+
+    if (allowedToSetPresenter) {
+      actions.push(this.makeDropdownItem(
+        'setPresenter',
+        intl.formatMessage(messages.MakePresenterLabel),
+        () => this.onActionsHide(assignPresenter(user.id)),
+        'presentation',
+      ));
+    }
+
+    if (allowedToRemove) {
+      actions.push(this.makeDropdownItem(
+        'remove',
+        intl.formatMessage(messages.RemoveUserLabel, { 0: user.name }),
+        () => this.onActionsHide(removeUser(user.id)),
+        'circle_close',
+      ));
+    }
+
+    if (allowedToPromote) {
+      actions.push(this.makeDropdownItem(
+        'promote',
+        intl.formatMessage(messages.PromoteUserLabel),
+        () => this.onActionsHide(changeRole(user.id, 'MODERATOR')),
+        'promote',
+      ));
+    }
+
+    if (allowedToDemote) {
+      actions.push(this.makeDropdownItem(
+        'demote',
+        intl.formatMessage(messages.DemoteUserLabel),
+        () => this.onActionsHide(changeRole(user.id, 'VIEWER')),
+        'user',
+      ));
+    }
+
+    return actions;
+  }
+
   onActionsShow() {
-    Session.set('dropdownOpen', true);
-    const { getScrollContainerRef } = this.props;
     const dropdown = this.getDropdownMenuParent();
-    const scrollContainer = getScrollContainerRef();
+    const scrollContainer = this.props.getScrollContainerRef();
 
     if (dropdown && scrollContainer) {
       const dropdownTrigger = dropdown.children[0];
@@ -199,320 +326,51 @@ class UserDropdown extends PureComponent {
   }
 
   onActionsHide(callback) {
-    const { getScrollContainerRef } = this.props;
-
     this.setState({
       isActionsOpen: false,
       dropdownVisible: false,
-      showNestedOptions: false,
     });
 
-    const scrollContainer = getScrollContainerRef();
+    const scrollContainer = this.props.getScrollContainerRef();
     scrollContainer.removeEventListener('scroll', this.handleScroll, false);
 
     if (callback) {
       return callback;
     }
-
-    return Session.set('dropdownOpen', false);
-  }
-
-  getUsersActions() {
-    const {
-      intl,
-      currentUser,
-      user,
-      voiceUser,
-      getAvailableActions,
-      getGroupChatPrivate,
-      getEmojiList,
-      setEmojiStatus,
-      assignPresenter,
-      removeUser,
-      toggleVoice,
-      changeRole,
-      lockSettingsProps,
-      hasPrivateChatBetweenUsers,
-      toggleUserLock,
-      requestUserInformation,
-      isMeteorConnected,
-      userLocks,
-      isMe,
-      meetingIsBreakout,
-      mountModal,
-    } = this.props;
-    const { showNestedOptions } = this.state;
-
-    const amIModerator = currentUser.role === ROLE_MODERATOR;
-    const actionPermissions = getAvailableActions(amIModerator, meetingIsBreakout, user, voiceUser);
-    const actions = [];
-
-    const {
-      allowedToChatPrivately,
-      allowedToMuteAudio,
-      allowedToUnmuteAudio,
-      allowedToResetStatus,
-      allowedToRemove,
-      allowedToSetPresenter,
-      allowedToPromote,
-      allowedToDemote,
-      allowedToChangeStatus,
-      allowedToChangeUserLockStatus,
-    } = actionPermissions;
-
-    const { disablePrivateChat } = lockSettingsProps;
-
-    const enablePrivateChat = currentUser.role === ROLE_MODERATOR
-      ? allowedToChatPrivately
-      : allowedToChatPrivately
-      && (!(currentUser.locked && disablePrivateChat)
-        || hasPrivateChatBetweenUsers(currentUser.userId, user.userId)
-        || user.role === ROLE_MODERATOR) && isMeteorConnected;
-
-    const { allowUserLookup } = Meteor.settings.public.app;
-
-    if (showNestedOptions && isMeteorConnected) {
-      if (allowedToChangeStatus) {
-        actions.push(this.makeDropdownItem(
-          'back',
-          intl.formatMessage(messages.backTriggerLabel),
-          () => this.setState(
-            {
-              showNestedOptions: false,
-              isActionsOpen: true,
-            }, Session.set('dropdownOpen', true),
-          ),
-          'left_arrow',
-        ));
-      }
-
-      actions.push(<DropdownListSeparator key={_.uniqueId('list-separator-')} />);
-
-      const statuses = Object.keys(getEmojiList);
-      statuses.map(status => actions.push(this.makeDropdownItem(
-        status,
-        intl.formatMessage({ id: `app.actionsBar.emojiMenu.${status}Label` }),
-        () => { setEmojiStatus(user.userId, status); this.resetMenuState(); },
-        getEmojiList[status],
-      )));
-
-      return actions;
-    }
-
-    if (allowedToChangeStatus && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'setstatus',
-        intl.formatMessage(messages.statusTriggerLabel),
-        () => this.setState(
-          {
-            showNestedOptions: true,
-            isActionsOpen: true,
-          }, Session.set('dropdownOpen', true),
-        ),
-        'user',
-        'right_arrow',
-      ));
-    }
-
-    if (CHAT_ENABLED && enablePrivateChat && !meetingIsBreakout && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'activeChat',
-        intl.formatMessage(messages.ChatLabel),
-        () => {
-          getGroupChatPrivate(currentUser.userId, user);
-          Session.set('openPanel', 'chat');
-          Session.set('idChatOpen', user.userId);
-        },
-        'chat',
-      ));
-    }
-
-    if (allowedToResetStatus && user.emoji !== 'none' && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'clearStatus',
-        intl.formatMessage(messages.ClearStatusLabel),
-        () => this.onActionsHide(setEmojiStatus(user.userId, 'none')),
-        'clear_status',
-      ));
-    }
-
-    if (allowedToMuteAudio && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'mute',
-        intl.formatMessage(messages.MuteUserAudioLabel),
-        () => this.onActionsHide(toggleVoice(user.userId)),
-        'mute',
-      ));
-    }
-
-    if (allowedToUnmuteAudio && !userLocks.userMic && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'unmute',
-        intl.formatMessage(messages.UnmuteUserAudioLabel),
-        () => this.onActionsHide(toggleVoice(user.userId)),
-        'unmute',
-      ));
-    }
-
-    if (allowedToSetPresenter && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'setPresenter',
-        isMe(user.userId)
-          ? intl.formatMessage(messages.takePresenterLabel)
-          : intl.formatMessage(messages.makePresenterLabel),
-        () => this.onActionsHide(assignPresenter(user.userId)),
-        'presentation',
-      ));
-    }
-
-    if (allowedToPromote && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'promote',
-        intl.formatMessage(messages.PromoteUserLabel),
-        () => this.onActionsHide(changeRole(user.userId, 'MODERATOR')),
-        'promote',
-      ));
-    }
-
-    if (allowedToDemote && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'demote',
-        intl.formatMessage(messages.DemoteUserLabel),
-        () => this.onActionsHide(changeRole(user.userId, 'VIEWER')),
-        'user',
-      ));
-    }
-
-    if (allowedToChangeUserLockStatus && isMeteorConnected) {
-      const userLocked = user.locked && user.role !== ROLE_MODERATOR;
-      actions.push(this.makeDropdownItem(
-        'unlockUser',
-        userLocked ? intl.formatMessage(messages.UnlockUserLabel, { 0: user.name })
-          : intl.formatMessage(messages.LockUserLabel, { 0: user.name }),
-        () => this.onActionsHide(toggleUserLock(user.userId, !userLocked)),
-        userLocked ? 'unlock' : 'lock',
-      ));
-    }
-
-    if (allowUserLookup && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'directoryLookup',
-        intl.formatMessage(messages.DirectoryLookupLabel),
-        () => this.onActionsHide(requestUserInformation(user.extId)),
-        'user',
-      ));
-    }
-
-    if (allowedToRemove && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'remove',
-        intl.formatMessage(messages.RemoveUserLabel, { 0: user.name }),
-        () => this.onActionsHide(mountModal(
-          <Modal
-            overlayClassName={styles.overlay}
-            className={styles.modal}
-            onRequestClose={() => mountModal(null)}
-            hideBorder
-            contentLabel={intl.formatMessage(messages.removeConfirmTitle, { 0: user.name })}
-          >
-            <div className={styles.container}>
-              <div className={styles.header}>
-                <div className={styles.title}>
-                  {intl.formatMessage(messages.removeConfirmTitle, { 0: user.name })}
-                </div>
-              </div>
-              <div className={styles.description}>
-                {intl.formatMessage(messages.removeConfirmDesc)}
-              </div>
-              <div className={styles.footer}>
-                <Button
-                  color="primary"
-                  className={styles.button}
-                  label={intl.formatMessage(messages.yesLabel)}
-                  onClick={() => {
-                    mountModal(null);
-                    removeUser(user.userId);
-                  }}
-                />
-                <Button
-                  label={intl.formatMessage(messages.noLabel)}
-                  className={styles.button}
-                  onClick={() => mountModal(null)}
-                />
-              </div>
-            </div>
-          </Modal>,
-        )),
-        'circle_close',
-      ));
-    }
-
-    return actions;
   }
 
   getDropdownMenuParent() {
     return findDOMNode(this.dropdown);
   }
 
-  makeDropdownItem(key, label, onClick, icon = null, iconRight = null) {
-    const { getEmoji } = this.props;
-    return (
-      <DropdownListItem
-        {...{
-          key,
-          label,
-          onClick,
-          icon,
-          iconRight,
-        }}
-        className={key === getEmoji ? styles.emojiSelected : null}
-        data-test={key}
-      />
-    );
-  }
-
-  resetMenuState() {
-    return this.setState({
-      isActionsOpen: false,
-      dropdownOffset: 0,
-      dropdownDirection: 'top',
-      dropdownVisible: false,
-      showNestedOptions: false,
-    });
-  }
-
-
   handleScroll() {
-    this.setState({
-      isActionsOpen: false,
-      showNestedOptions: false,
-    });
+    this.setState({ isActionsOpen: false });
   }
 
   /**
    * Check if the dropdown is visible, if so, check if should be draw on top or bottom direction.
    */
   checkDropdownDirection() {
-    const { getScrollContainerRef } = this.props;
     if (this.isDropdownActivedByUser()) {
       const dropdown = this.getDropdownMenuParent();
       const dropdownTrigger = dropdown.children[0];
       const dropdownContent = dropdown.children[1];
 
-      const scrollContainer = getScrollContainerRef();
+      const scrollContainer = this.props.getScrollContainerRef();
 
       const nextState = {
         dropdownVisible: true,
       };
 
-      const isDropdownVisible = UserDropdown.checkIfDropdownIsVisible(
-        dropdownContent.offsetTop,
-        dropdownContent.offsetHeight,
-      );
+      const isDropdownVisible =
+        UserDropdown.checkIfDropdownIsVisible(
+          dropdownContent.offsetTop,
+          dropdownContent.offsetHeight,
+        );
 
       if (!isDropdownVisible) {
-        const { offsetTop, offsetHeight } = dropdownTrigger;
-        const offsetPageTop = (offsetTop + offsetHeight) - scrollContainer.scrollTop;
+        const offsetPageTop =
+          ((dropdownTrigger.offsetTop + dropdownTrigger.offsetHeight) - scrollContainer.scrollTop);
 
         nextState.dropdownOffset = window.innerHeight - offsetPageTop;
         nextState.dropdownDirection = 'bottom';
@@ -525,7 +383,7 @@ class UserDropdown extends PureComponent {
   /**
   * Check if the dropdown is visible and is opened by the user
   *
-  * @return True if is visible and opened by the user
+  * @return True if is visible and opened by the user.
   */
   isDropdownActivedByUser() {
     const { isActionsOpen, dropdownVisible } = this.state;
@@ -537,37 +395,28 @@ class UserDropdown extends PureComponent {
     const {
       normalizeEmojiName,
       user,
-      userInBreakout,
-      breakoutSequence,
-      meetingIsBreakout,
-      voiceUser,
     } = this.props;
 
     const { clientType } = user;
     const isVoiceOnly = clientType === 'dial-in-user';
 
-    const iconUser = user.emoji !== 'none'
-      ? (<Icon iconName={normalizeEmojiName(user.emoji)} />)
-      : user.name.toLowerCase().slice(0, 2);
+    const iconUser = user.emoji.status !== 'none' ?
+      (<Icon iconName={normalizeEmojiName(user.emoji.status)} />) :
+      user.name.toLowerCase().slice(0, 2);
 
-    const iconVoiceOnlyUser = (<Icon iconName="audio_on" />);
-    const userIcon = isVoiceOnly ? iconVoiceOnlyUser : iconUser;
+    const iconVoiceOnlyUser = (<Icon iconName="speak_louder" />);
 
     return (
       <UserAvatar
-        moderator={user.role === ROLE_MODERATOR}
-        presenter={user.presenter}
-        talking={voiceUser.isTalking}
-        muted={voiceUser.isMuted}
-        listenOnly={voiceUser.isListenOnly}
-        voice={voiceUser.isVoiceUser}
-        noVoice={!voiceUser.isVoiceUser}
+        moderator={user.isModerator}
+        presenter={user.isPresenter}
+        talking={user.isTalking}
+        muted={user.isMuted}
+        listenOnly={user.isListenOnly}
+        voice={user.isVoiceUser}
         color={user.color}
       >
-        {
-        userInBreakout
-        && !meetingIsBreakout
-          ? breakoutSequence : userIcon}
+        {isVoiceOnly ? iconVoiceOnlyUser : iconUser }
       </UserAvatar>
     );
   }
@@ -575,11 +424,10 @@ class UserDropdown extends PureComponent {
   render() {
     const {
       compact,
-      currentUser,
       user,
       intl,
-      isThisMeetingLocked,
-      isMe,
+      isMeetingLocked,
+      meeting,
     } = this.props;
 
     const {
@@ -587,20 +435,20 @@ class UserDropdown extends PureComponent {
       dropdownVisible,
       dropdownDirection,
       dropdownOffset,
-      showNestedOptions,
     } = this.state;
 
     const actions = this.getUsersActions();
 
     const userItemContentsStyle = {};
 
+    userItemContentsStyle[styles.userItemContentsCompact] = compact;
     userItemContentsStyle[styles.dropdown] = true;
-    userItemContentsStyle[styles.userListItem] = !isActionsOpen;
-    userItemContentsStyle[styles.usertListItemWithMenu] = isActionsOpen;
+    userItemContentsStyle[styles.userListItem] = !this.state.isActionsOpen;
+    userItemContentsStyle[styles.usertListItemWithMenu] = this.state.isActionsOpen;
 
-    const you = isMe(user.userId) ? intl.formatMessage(messages.you) : '';
+    const you = (user.isCurrent) ? intl.formatMessage(messages.you) : '';
 
-    const presenter = (user.presenter)
+    const presenter = (user.isPresenter)
       ? intl.formatMessage(messages.presenter)
       : '';
 
@@ -610,34 +458,33 @@ class UserDropdown extends PureComponent {
         0: user.name,
         1: presenter,
         2: you,
-        3: user.emoji,
+        3: user.emoji.status,
       },
     );
 
     const contents = (
       <div
-        data-test={isMe(user.userId) ? 'userListItemCurrent' : null}
         className={!actions.length ? styles.userListItem : null}
       >
         <div className={styles.userItemContents}>
           <div className={styles.userAvatar}>
-            {this.renderUserAvatar()}
+            { this.renderUserAvatar() }
           </div>
           {<UserName
             {...{
               user,
               compact,
               intl,
-              isThisMeetingLocked,
+              meeting,
+              isMeetingLocked,
               userAriaLabel,
               isActionsOpen,
-              isMe,
             }}
           />}
           {<UserIcons
             {...{
               user,
-              amIModerator: currentUser.role === ROLE_MODERATOR,
+              compact,
             }}
           />}
         </div>
@@ -649,7 +496,7 @@ class UserDropdown extends PureComponent {
     return (
       <Dropdown
         ref={(ref) => { this.dropdown = ref; }}
-        keepOpen={isActionsOpen || showNestedOptions}
+        keepOpen={this.state.isActionsOpen}
         onShow={this.onActionsShow}
         onHide={this.onActionsHide}
         className={userItemContentsStyle}
@@ -683,4 +530,4 @@ class UserDropdown extends PureComponent {
 }
 
 UserDropdown.propTypes = propTypes;
-export default withModalMounter(lockContextContainer(UserDropdown));
+export default UserDropdown;
