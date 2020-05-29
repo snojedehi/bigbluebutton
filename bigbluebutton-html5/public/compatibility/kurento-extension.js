@@ -442,7 +442,7 @@ Kurento.prototype.startScreensharing = function () {
       return;
     }
   }
-  alert(333)
+
   const options = {
     mediaConstraints: {
       audio: true,
