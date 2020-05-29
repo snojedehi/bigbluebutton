@@ -99,22 +99,21 @@ class NavBar extends PureComponent {
               hideLabel
               label={intl.formatMessage(intlMessages.toggleUserListLabel)}
               aria-label={ariaLabel}
-              icon="user"
-              className={cx(toggleBtnClasses)}
+              // icon="user"
+              mycustomicon="fas fa-user-graduate"
+              color="success"
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
             />
           </div>
+
           <div className={styles.center}>
             <h1 className={styles.presentationTitle}>{presentationTitle}</h1>
 
-            <RecordingIndicator
-              mountModal={mountModal}
-              amIModerator={amIModerator}
-            />
+
           </div>
           <div className={styles.right}>
-            <SettingsDropdownContainer amIModerator={amIModerator} />
+            <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />
           </div>
         </div>
         <div className={styles.bottom}>

@@ -8,6 +8,7 @@ import { styles } from '../styles';
 const propTypes = {
   icon: PropTypes.string,
   label: PropTypes.string,
+  content: PropTypes.object,
   description: PropTypes.string,
 };
 
@@ -15,6 +16,7 @@ const defaultProps = {
   icon: '',
   label: '',
   description: '',
+  content:null,
   tabIndex: 0,
 };
 
@@ -37,7 +39,7 @@ export default class DropdownListItem extends Component {
 
   render() {
     const {
-      id, label, description, children, injectRef, tabIndex, onClick, onKeyDown,
+      id, label,content, description, children, injectRef, tabIndex, onClick, onKeyDown,
       className, style,
     } = this.props;
 
@@ -55,13 +57,13 @@ export default class DropdownListItem extends Component {
         role="menuitem"
         data-test={this.props['data-test']}
       >
-        {
-          children || this.renderDefault()
+        {!content ?
+          children || this.renderDefault():null
         }
         {
-          label ?
+          label && ! content?
             (<span id={this.labelID} key="labelledby" hidden>{label}</span>)
-            : null
+            : content
         }
         <span id={this.descID} key="describedby" hidden>{description}</span>
       </li>

@@ -53,7 +53,16 @@ class UserContent extends PureComponent {
         className={styles.content}
         role="complementary"
       >
-
+          <UserParticipantsContainer
+              {...{
+                  compact,
+                  intl,
+                  currentUser,
+                  setEmojiStatus,
+                  roving,
+                  requestUserInformation,
+              }}
+          />
         {currentUser.role === ROLE_MODERATOR
           ? (
             <UserCaptionsContainer
@@ -86,16 +95,7 @@ class UserContent extends PureComponent {
           }}
         />
         <BreakoutRoomItem isPresenter={currentUser.presenter} hasBreakoutRoom={hasBreakoutRoom} />
-        <UserParticipantsContainer
-          {...{
-            compact,
-            intl,
-            currentUser,
-            setEmojiStatus,
-            roving,
-            requestUserInformation,
-          }}
-        />
+
         {CHAT_ENABLED
             ? (<UserMessages
                     {...{

@@ -17,24 +17,14 @@
 #
 
 
-source "https://rubygems.org"
+source "http://rubygems.org"
 
-gem "absolute_time"
-gem "builder"
-gem "fastimage"
-gem "fnv"
-gem "java_properties"
-gem "journald-logger"
-gem "jwt"
-gem "locale"
-gem "loofah"
-gem "nokogiri"
-gem "open4"
-gem "rb-inotify"
 gem "redis"
+gem "nokogiri"
+gem "loofah"
 gem "rubyzip"
+gem "builder"
 gem "trollop", "2.1.3"
-
-group :test, optional: true do
-  gem "rubocop", "~> 0.71.0"
-end
+gem "open4"
+gem "fastimage"
+gem "absolute_time"

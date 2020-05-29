@@ -616,38 +616,39 @@ class PresentationArea extends PureComponent {
           ref={(ref) => { this.refPresentationArea = ref; }}
           className={styles.presentationArea}
         >
+            <div
+                className={styles.svgContainer}
+                style={{
+                    height: svgHeight + toolbarHeight,
+                }}
+            >
+                {showSlide
+                    ? this.renderPresentationArea(svgDimensions, viewBoxDimensions)
+                    : null}
+                {showSlide && (userIsPresenter || multiUser)
+                    ? this.renderWhiteboardToolbar(svgDimensions)
+                    : null}
+                {showSlide && userIsPresenter
+                    ? (
+                        <div
+                            className={styles.presentationToolbar}
+                            ref={(ref) => { this.refPresentationToolbar = ref; }}
+                            style={
+                                {
+                                    width: toolbarWidth,
+                                }
+                            }
+                        >
+                            {this.renderPresentationToolbar()}
+                        </div>
+                    )
+                    : null}
+            </div>
           <div
             ref={(ref) => { this.refWhiteboardArea = ref; }}
             className={styles.whiteboardSizeAvailable}
           />
-          <div
-            className={styles.svgContainer}
-            style={{
-              height: svgHeight + toolbarHeight,
-            }}
-          >
-            {showSlide
-              ? this.renderPresentationArea(svgDimensions, viewBoxDimensions)
-              : null}
-            {showSlide && (userIsPresenter || multiUser)
-              ? this.renderWhiteboardToolbar(svgDimensions)
-              : null}
-            {showSlide && userIsPresenter
-              ? (
-                <div
-                  className={styles.presentationToolbar}
-                  ref={(ref) => { this.refPresentationToolbar = ref; }}
-                  style={
-                    {
-                      width: toolbarWidth,
-                    }
-                  }
-                >
-                  {this.renderPresentationToolbar()}
-                </div>
-              )
-              : null}
-          </div>
+
         </div>
       </div>
     );

@@ -199,16 +199,7 @@ class SettingsDropdown extends PureComponent {
     Session.set('codeError', this.LOGOUT_CODE);
     // mountModal(<MeetingEndedComponent code={LOGOUT_CODE} />);
   }
-  record(mountModal, amIModerator){
-    return(
-        <DropdownListItem
-            key="list-item-fullscreen2"
-            icon="settings"
-            label="ss"
-            description="ss"
-        />
-    )
-  }
+
   renderMenuItems() {
     const {
       intl, mountModal, amIModerator, isBreakoutRoom, isMeteorConnected,
@@ -235,10 +226,24 @@ class SettingsDropdown extends PureComponent {
     const shouldRenderLogoutOption = (isMeteorConnected && allowLogoutSetting)
       ? logoutOption
       : null;
-
+    const record=(mountModal,amIModerator)=>{
+      return(
+          <RecordingIndicator
+              mountModal={mountModal}
+              amIModerator={amIModerator}
+          />
+      )
+    }
     return _.compact([
-
-      this.record(mountModal, amIModerator),
+      (<DropdownListItem
+          key="list-item-recording"
+          content={<RecordingIndicator
+              mountModal={mountModal}
+              amIModerator={amIModerator}
+          />}
+          description=""
+      />)
+      ,
       <DropdownListSeparator key={_.uniqueId('list-separator-')} />,
       this.getFullscreenItem(),
       (<DropdownListItem

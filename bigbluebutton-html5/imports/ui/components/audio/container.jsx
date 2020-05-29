@@ -134,7 +134,18 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       setTimeout(() => openAudioModal(), 0);
     },
   });
+  var handleJoinListenOnly=()=>{
 
+
+    return Service.joinListenOnly().then(() => {
+    }).catch((err) => {
+      if (err.type === 'MEDIA_ERROR') {
+        this.setState({
+          content: 'help',
+        });
+      }
+    });
+  }
   return {
     init: () => {
       Service.init(messages, intl);
@@ -151,7 +162,8 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       if (enableVideo && autoShareWebcam) {
         openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else {
-        openAudioModal();
+        handleJoinListenOnly()
+        // openAudioModal();
         didMountAutoJoin = true;
       }
     },
