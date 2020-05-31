@@ -66,7 +66,7 @@ const UserAvatar = ({
 
 
     <div className={styles.content}>
-      {typeof children=='string'? <i className="fas fa-user"></i>:children }
+      {typeof children=='string'? <i style="color:#00fafd" className="fas fa-user"></i>:children }
     </div>
   </div>
 );
