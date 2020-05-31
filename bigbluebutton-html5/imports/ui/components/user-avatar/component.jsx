@@ -66,7 +66,7 @@ const UserAvatar = ({
 
 
     <div className={styles.content}>
-      {children}s
+      {typeof children ==Object?children: <i className="fas fa-user"></i> }
     </div>
   </div>
 );
