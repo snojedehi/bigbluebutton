@@ -157,8 +157,8 @@ public:
     typingIndicator:
       enabled: true
   note:
-    enabled: false
-    url: ETHERPAD_HOST
+    enabled: true
+    url: https://bb.vandud.com/pad
     config:
       showLineNumbers: false
       showChat: false
