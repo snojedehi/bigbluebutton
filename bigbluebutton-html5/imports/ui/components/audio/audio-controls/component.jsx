@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles';
-import AudioManager from '/imports/ui/services/audio-manager';
+import Service from '../service';
 
 const intlMessages = defineMessages({
   joinAudio: {
@@ -26,7 +26,6 @@ const intlMessages = defineMessages({
     description: 'Unmute audio button label',
   },
 });
-
 
 const propTypes = {
   processToggleMuteFromOutside: PropTypes.func.isRequired,
@@ -75,10 +74,24 @@ class AudioControls extends PureComponent {
         joinIcon = 'audio_on';
       }
     }
+    var joinMicrophone =()=>{
+      const call = new Promise((resolve, reject) => {
+        resolve(Service.joinMicrophone());
+        reject(() => {
+          Service.exitAudio();
+        });
+      });
 
+
+      return call.then(() => {
+        // mountModal(null);
+      }).catch((error) => {
+        throw error;
+      });
+    }
     return (
         <span className={styles.container}>
-        {showMute && isVoiceUser
+        {(showMute && isVoiceUser)
             ? (
                 <Button
                     className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
@@ -98,9 +111,28 @@ class AudioControls extends PureComponent {
                     accessKey={shortcuts.toggleMute}
                 />
             ) : null}
+          {inAudio && !(showMute && isVoiceUser)
+              ? (
+                  <Button
+                      className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
+                      onClick={joinMicrophone}
+                      disabled={disable}
+                      hideLabel
+                      label="unmute"
+                      aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                          : intl.formatMessage(intlMessages.muteAudio)}
+                      color={!muted ? 'primary' : 'default'}
+                      ghost={muted}
+                      // icon={muted ? 'mute' : 'unmute'}
+                      mycustomicon="fas fa-headset"
+                      size="lg"
+                      circle
+                      accessKey={shortcuts.toggleMute}
+                  />
+              ) : null}
           <Button
               className={cx(styles.button, inAudio || styles.btn)}
-              onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+              onClick={inAudio ? handleLeaveAudio : joinMicrophone}
               disabled={disable}
               hideLabel
               aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
@@ -109,7 +141,7 @@ class AudioControls extends PureComponent {
                   : intl.formatMessage(intlMessages.joinAudio)}
               color={inAudio ? 'primary' : 'default'}
               ghost={!inAudio}
-              mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headphones-alt"}
+              mycustomicon={inAudio? "fas fa-volume-mute":"fas fa-headset"}
               size="lg"
               circle
               accessKey={inAudio ? shortcuts.leaveAudio : shortcuts.joinAudio}
