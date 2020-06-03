@@ -68,7 +68,7 @@ const getRevs = () => {
 };
 
 const isEnabled = () => {
-
+  console.log("noteeeeeeeeeeeeeeeee222")
   const note = Note.findOne({ meetingId: Auth.meetingID });
   console.log("note",note)
   console.log("noteeeeeeeeeeeeeeeee")
