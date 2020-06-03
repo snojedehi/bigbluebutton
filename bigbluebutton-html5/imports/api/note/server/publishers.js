@@ -11,7 +11,7 @@ function note() {
   const { meetingId, requesterUserId } = extractCredentials(this.userId);
 
   Logger.info(`Publishing note for ${meetingId} ${requesterUserId}`);
-
+  console.log("kkkkkkkkk2",Note.find({ meetingId }))
   return Note.find({ meetingId });
 }
 
