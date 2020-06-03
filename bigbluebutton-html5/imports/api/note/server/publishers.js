@@ -4,7 +4,7 @@ import Note from '/imports/api/note';
 import { extractCredentials } from '/imports/api/common/server/helpers';
 
 function note() {
-  console.log("kkkkkkkkk")
+  console.log("kkkkkkkkk2")
   if (!this.userId) {
     return Note.find({ meetingId: '' });
   }
