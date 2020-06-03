@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { hashFNV32a } from '/imports/api/common/server/helpers';
 
 const ETHERPAD = Meteor.settings.private.etherpad;
+console.log(Meteor.settings.public)
 const NOTE_CONFIG = Meteor.settings.public.note;
 const BASE_URL = `http://${ETHERPAD.host}:${ETHERPAD.port}/api/${ETHERPAD.version}`;
 const TOKEN = '_';
