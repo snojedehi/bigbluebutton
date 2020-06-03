@@ -68,7 +68,10 @@ const getRevs = () => {
 };
 
 const isEnabled = () => {
+
   const note = Note.findOne({ meetingId: Auth.meetingID });
+  console.log("note",note)
+  console.log("noteeeeeeeeeeeeeeeee")
   return NOTE_CONFIG.enabled && note;
 };
 
