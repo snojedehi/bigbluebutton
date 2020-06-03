@@ -22,6 +22,7 @@ export default function createNote(meetingId) {
   const noteId = generateNoteId(meetingId);
 
   const createURL = createPadURL(noteId);
+  console.log(createURL)
   axios({
     method: 'get',
     url: createURL,
