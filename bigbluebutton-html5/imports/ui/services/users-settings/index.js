@@ -2,6 +2,7 @@ import Auth from '/imports/ui/services/auth';
 import UserSettings from '/imports/api/users-settings';
 
 export default function getFromUserSettings(setting, defaultValue) {
+  console.log("ssssssssss")
   const selector = {
     meetingId: Auth.meetingID,
     userId: Auth.userID,
