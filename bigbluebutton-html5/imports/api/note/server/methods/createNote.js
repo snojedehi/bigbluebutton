@@ -16,7 +16,6 @@ export default function createNote(meetingId) {
     Logger.warn(`Notes are disabled for ${meetingId}`);
     return;
   }
-
   check(meetingId, String);
 
   const noteId = generateNoteId(meetingId);
