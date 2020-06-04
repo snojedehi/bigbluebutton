@@ -337,22 +337,23 @@ class PresentationToolbar extends PureComponent {
                 )
                 : null
             }
+            <Button
+                role="button"
+                aria-label={nextSlideAriaLabel}
+                aria-describedby={endOfSlides ? 'noNextSlideDesc' : 'nextSlideDesc'}
+                disabled={endOfSlides || !isMeteorConnected}
+                color="default"
+                icon="right_arrow"
+                size="md"
+                onClick={this.nextSlideHandler}
+                label={intl.formatMessage(intlMessages.nextSlideLabel)}
+                hideLabel
+                className={cx(styles.skipSlide, styles.presentationBtn)}
+                tooltipDistance={tooltipDistance}
+            />
           </div>
         }
-        <Button
-            role="button"
-            aria-label={nextSlideAriaLabel}
-            aria-describedby={endOfSlides ? 'noNextSlideDesc' : 'nextSlideDesc'}
-            disabled={endOfSlides || !isMeteorConnected}
-            color="default"
-            icon="right_arrow"
-            size="md"
-            onClick={this.nextSlideHandler}
-            label={intl.formatMessage(intlMessages.nextSlideLabel)}
-            hideLabel
-            className={cx(styles.skipSlide, styles.presentationBtn)}
-            tooltipDistance={tooltipDistance}
-        />
+
       </div>
     );
   }
