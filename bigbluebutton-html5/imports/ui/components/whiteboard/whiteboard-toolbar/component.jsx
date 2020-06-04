@@ -448,7 +448,7 @@ class WhiteboardToolbar extends Component {
     return panMode
       ? (
         <ToolbarMenuItem
-          icon="hand"
+          mycustomicon="fas fa-hand-pointer"
           label={intl.formatMessage(intlMessages.toolbarItemPan)}
           onItemClick={() => { }}
           className={styles.toolbarButton}

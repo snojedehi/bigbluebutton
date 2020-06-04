@@ -75,6 +75,7 @@ export default class ToolbarMenuItem extends Component {
       label,
       icon,
       customIcon,
+      mycustomicon,
       onBlur,
       className,
       children,
@@ -94,6 +95,7 @@ export default class ToolbarMenuItem extends Component {
           label={label}
           icon={icon || null}
           customIcon={customIcon || null}
+          mycustomicon={mycustomicon || null}
           onMouseDown={this.handleOnMouseDown}
           onMouseUp={this.handleOnMouseUp}
           onKeyPress={this.handleOnMouseDown}
@@ -124,6 +126,7 @@ ToolbarMenuItem.propTypes = {
   // thus they are optional
   icon: PropTypes.string,
   customIcon: PropTypes.node,
+  mycustomicon: PropTypes.string,
   label: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
@@ -134,6 +137,7 @@ ToolbarMenuItem.defaultProps = {
   objectToReturn: null,
   icon: '',
   customIcon: null,
+  mycustomicon: null,
   onBlur: null,
   children: null,
   disabled: false,
