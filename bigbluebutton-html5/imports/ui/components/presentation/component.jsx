@@ -423,7 +423,7 @@ class PresentationArea extends PureComponent {
           textAlign: 'center',
         }}
       >
-        {this.renderPresentationClose()}
+        {/*{this.renderPresentationClose()}*/}
         {this.renderPresentationDownload()}
         {this.renderPresentationFullscreen()}
         <svg
