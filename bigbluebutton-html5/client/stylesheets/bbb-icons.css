@@ -162,10 +162,10 @@
 
 /* Aliases for emoji status */
 .icon-bbb-time:before {
-  content: "\e908";
+  content: "⏱️";
 }
 .icon-bbb-hand:before {
-  content: "\e90f";
+  content: "🤚";
 }
 .icon-bbb-undecided:before {
   content: "😐";
@@ -180,13 +180,13 @@
   content: "🥴";
 }
 .icon-bbb-applause:before {
-  content: "\e923";
+  content: "👏";
 }
 .icon-bbb-thumbs_up:before {
-  content: "\e92d";
+  content: "👍";
 }
 .icon-bbb-thumbs_down:before {
-  content: "\e92c";
+  content: "👎";
 }
 .icon-bbb-send:before {
   content: "\e934";
