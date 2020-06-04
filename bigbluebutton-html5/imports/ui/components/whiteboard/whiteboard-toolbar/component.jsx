@@ -738,7 +738,7 @@ class WhiteboardToolbar extends Component {
       <ToolbarMenuItem
         disabled={!isMeteorConnected}
         label={intl.formatMessage(intlMessages.toolbarClearAnnotations)}
-        icon="delete"
+        mycustomicon="far fa-trash-altdelete"
         onItemClick={this.handleClearAll}
         className={styles.toolbarButton}
       />
