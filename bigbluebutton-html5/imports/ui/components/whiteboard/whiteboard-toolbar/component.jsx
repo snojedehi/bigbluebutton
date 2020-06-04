@@ -74,12 +74,14 @@ class WhiteboardToolbar extends Component {
     const { annotations, multiUser, isPresenter } = this.props;
 
     let annotationSelected = {
+      mycustomicon:'fas fa-undo-alt',
       icon: 'hand',
       value: 'hand',
     };
 
     if (multiUser && !isPresenter) {
       annotationSelected = {
+        mycustomicon:'fas fa-undo-alt',
         icon: 'pen_tool',
         value: 'pencil',
       };
@@ -457,7 +459,7 @@ class WhiteboardToolbar extends Component {
         <ToolbarMenuItem
           disabled={isDisabled}
           label={intl.formatMessage(intlMessages.toolbarTools)}
-          icon={annotationSelected.icon}
+          mycustomicon="fas fa-undo-alt"
           onItemClick={this.displaySubMenu}
           objectToReturn="annotationList"
           onBlur={this.closeSubMenu}
