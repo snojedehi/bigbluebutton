@@ -127,7 +127,7 @@
   content: "\e90d";
 }
 .icon-bbb-group_chat:before {
-  content: "\e910";
+  content: "💬";
 }
 .icon-bbb-close:before {
   content: "\e912";
@@ -256,7 +256,7 @@
   content: "\e949";
 }
 .icon-bbb-copy:before {
-  content: "\e94a";
+  content: "📘";
 }
 .icon-bbb-shortcuts:before {
   content: "\e94b";
