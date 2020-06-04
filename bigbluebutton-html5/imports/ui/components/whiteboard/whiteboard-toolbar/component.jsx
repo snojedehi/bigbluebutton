@@ -756,7 +756,7 @@ class WhiteboardToolbar extends Component {
           : intl.formatMessage(intlMessages.toolbarMultiUserOn)
         }
         // icon={multiUser ? 'multi_whiteboard' : 'whiteboard'}
-        mycustomicon={multiUser ? 'fas fa-chalkboard-teacher' : 'fas fa-chalkboard'}
+        mycustomicon={multiUser ? 'icon-bbb-multi_whiteboard' : 'fas fa-chalkboard'}
         onItemClick={this.handleSwitchWhiteboardMode}
         className={styles.toolbarButton}
       />
