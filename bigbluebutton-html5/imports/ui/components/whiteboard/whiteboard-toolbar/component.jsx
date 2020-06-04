@@ -74,14 +74,12 @@ class WhiteboardToolbar extends Component {
     const { annotations, multiUser, isPresenter } = this.props;
 
     let annotationSelected = {
-      mycustomicon:'fas fa-undo-alt',
       icon: 'hand',
       value: 'hand',
     };
 
     if (multiUser && !isPresenter) {
       annotationSelected = {
-        mycustomicon:'fas fa-undo-alt',
         icon: 'pen_tool',
         value: 'pencil',
       };
@@ -450,7 +448,7 @@ class WhiteboardToolbar extends Component {
     return panMode
       ? (
         <ToolbarMenuItem
-          mycustomicon="fas fa-hand-pointer"
+          icon="hand"
           label={intl.formatMessage(intlMessages.toolbarItemPan)}
           onItemClick={() => { }}
           className={styles.toolbarButton}
@@ -459,7 +457,7 @@ class WhiteboardToolbar extends Component {
         <ToolbarMenuItem
           disabled={isDisabled}
           label={intl.formatMessage(intlMessages.toolbarTools)}
-          mycustomicon="fas fa-undo-alt"
+          icon={annotationSelected.icon}
           onItemClick={this.displaySubMenu}
           objectToReturn="annotationList"
           onBlur={this.closeSubMenu}
@@ -726,7 +724,7 @@ class WhiteboardToolbar extends Component {
       <ToolbarMenuItem
         disabled={!isMeteorConnected}
         label={intl.formatMessage(intlMessages.toolbarUndoAnnotation)}
-        icon="undo"
+        mycustomicon="fas fa-undo-alt"
         onItemClick={this.handleUndo}
         className={styles.toolbarButton}
       />
