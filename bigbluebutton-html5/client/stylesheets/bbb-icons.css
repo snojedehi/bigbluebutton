@@ -171,13 +171,13 @@
   content: "😐";
 }
 .icon-bbb-happy:before {
-  content: "\e90e";
+  content: "😁";
 }
 .icon-bbb-sad:before {
-  content: "\e909";
+  content: "😖";
 }
 .icon-bbb-confused:before {
-  content: "\e911";
+  content: "🥴";
 }
 .icon-bbb-applause:before {
   content: "\e923";
