@@ -11,8 +11,6 @@ import ZoomTool from './zoom-tool/component';
 import FullscreenButtonContainer from '../../fullscreen-button/container';
 import Tooltip from '/imports/ui/components/tooltip/component';
 import KEY_CODES from '/imports/utils/keyCodes';
-import MediaService, {shouldEnableSwapLayout} from "../../media/service";
-import PresentationCloseButton from "../presentation-close-button/component";
 
 const intlMessages = defineMessages({
   previousSlideLabel: {
@@ -201,13 +199,7 @@ class PresentationToolbar extends PureComponent {
 
     return optionList;
   }
-  renderPresentationClose() {
-    const { isFullscreen } = this.state;
-    if (!shouldEnableSwapLayout() || isFullscreen) {
-      return null;
-    }
-    return <PresentationCloseButton toggleSwapLayout={MediaService.toggleSwapLayout} />;
-  }
+
   render() {
     const {
       currentSlideNum,
@@ -347,7 +339,20 @@ class PresentationToolbar extends PureComponent {
             }
           </div>
         }
-        {this.renderPresentationClose()}
+        <Button
+            role="button"
+            aria-label={nextSlideAriaLabel}
+            aria-describedby={endOfSlides ? 'noNextSlideDesc' : 'nextSlideDesc'}
+            disabled={endOfSlides || !isMeteorConnected}
+            color="default"
+            icon="right_arrow"
+            size="md"
+            onClick={this.nextSlideHandler}
+            label={intl.formatMessage(intlMessages.nextSlideLabel)}
+            hideLabel
+            className={cx(styles.skipSlide, styles.presentationBtn)}
+            tooltipDistance={tooltipDistance}
+        />
       </div>
     );
   }
