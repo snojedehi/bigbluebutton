@@ -306,28 +306,28 @@ class AudioModal extends Component {
     });
   }
 
-    handleJoinMicrophone() {
-      const {
-        joinMicrophone,
-      } = this.props;
+  handleJoinMicrophone() {
+    const {
+      joinMicrophone,
+    } = this.props;
 
-      const {
-        disableActions,
-      } = this.state;
+    const {
+      disableActions,
+    } = this.state;
 
-      if (disableActions) return;
+    if (disableActions) return;
 
+    this.setState({
+      hasError: false,
+      disableActions: true,
+    });
+
+    joinMicrophone().then(() => {
       this.setState({
-        hasError: false,
-        disableActions: true,
+        disableActions: false,
       });
-
-      joinMicrophone().then(() => {
-        this.setState({
-          disableActions: false,
-        });
-      }).catch(this.handleGoToAudioOptions);
-    }
+    }).catch(this.handleGoToAudioOptions);
+  }
 
   skipAudioOptions() {
     const {
@@ -536,7 +536,7 @@ class AudioModal extends Component {
     } = this.props;
 
     const { content } = this.state;
-    mountModal(null)
+
     return (
       <span>
         {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
