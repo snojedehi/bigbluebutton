@@ -457,7 +457,8 @@ class WhiteboardToolbar extends Component {
         <ToolbarMenuItem
           disabled={isDisabled}
           label={intl.formatMessage(intlMessages.toolbarTools)}
-          icon={annotationSelected.icon}
+          // icon={annotationSelected.icon}
+          mycustomicon="fas fa-hand-pointer"
           onItemClick={this.displaySubMenu}
           objectToReturn="annotationList"
           onBlur={this.closeSubMenu}
