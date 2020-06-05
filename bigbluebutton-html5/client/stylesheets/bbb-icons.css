@@ -167,6 +167,9 @@
 .icon-bbb-hand:before {
   content: "\e90f";
 }
+.icon-bbb-love:before {
+  content: "😍";
+}
 .icon-bbb-myhand:before {
   content: "🤚";
 }
