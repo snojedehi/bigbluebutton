@@ -110,6 +110,8 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   const openAudioModal = () => new Promise((resolve) => {
     const b=mountModal(<AudioModalContainer resolve={resolve} />);
     // b.closeModal()
+  }).then(() => {
+    mountModal(null)
   });
 
   const openVideoPreviewModal = () => new Promise((resolve) => {
@@ -171,9 +173,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       } else {
         handleJoinMicrophone()
         // handleJoinListenOnly()
-        openAudioModal().then(() => {
-          mountModal(null)
-        });
+        openAudioModal()
         // openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
         didMountAutoJoin = true;
       }
