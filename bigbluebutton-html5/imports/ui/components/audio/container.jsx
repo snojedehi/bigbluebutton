@@ -140,7 +140,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   var handleJoinListenOnly=()=>{
 
 
-    return Service.joinListenOnl().then(() => {
+    return Service.joinListenOnly().then(() => {
     }).catch((err) => {
       if (err.type === 'MEDIA_ERROR') {
         this.setState({
