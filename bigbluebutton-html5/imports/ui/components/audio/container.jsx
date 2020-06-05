@@ -109,7 +109,8 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   const { userWebcam, userMic } = userLocks;
   const openAudioModal = () => new Promise((resolve) => {
     const b=mountModal(<AudioModalContainer resolve={resolve} />);
-    b.closeModal()
+    mountModal(null)
+    // b.closeModal()
   });
 
   const openVideoPreviewModal = () => new Promise((resolve) => {
