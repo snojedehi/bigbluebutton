@@ -536,55 +536,55 @@ class AudioModal extends Component {
     } = this.props;
 
     const { content } = this.state;
-
-    return (
-      <span>
-        {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
-        <Modal
-          overlayClassName={styles.overlay}
-          className={styles.modal}
-          onRequestClose={closeModal}
-          hideBorder
-          contentLabel={intl.formatMessage(intlMessages.ariaModalTitle)}
-        >
-          {isIEOrEdge ? (
-            <p className={cx(styles.text, styles.browserWarning)}>
-              <FormattedMessage
-                id="app.audioModal.unsupportedBrowserLabel"
-                description="Warning when someone joins with a browser that isnt supported"
-                values={{
-                  0: <a href="https://www.google.com/chrome/">Chrome</a>,
-                  1: <a href="https://getfirefox.com">Firefox</a>,
-                }}
-              />
-            </p>
-          ) : null}
-          {!this.skipAudioOptions()
-            ? (
-              <header
-                data-test="audioModalHeader"
-                className={styles.header}
-              >
-                {
-                  isIOSChrome ? null
-                    : (
-                      <h3 className={styles.title}>
-                        {content
-                          ? intl.formatMessage(this.contents[content].title)
-                          : intl.formatMessage(intlMessages.audioChoiceLabel)}
-                      </h3>
-                    )
-                }
-              </header>
-            )
-            : null
-          }
-          <div className={styles.content}>
-            {this.renderContent()}
-          </div>
-        </Modal>
-      </span>
-    );
+    return (<span></span>)
+    // return (
+    //   <span>
+    //     {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
+    //     <Modal
+    //       overlayClassName={styles.overlay}
+    //       className={styles.modal}
+    //       onRequestClose={closeModal}
+    //       hideBorder
+    //       contentLabel={intl.formatMessage(intlMessages.ariaModalTitle)}
+    //     >
+    //       {isIEOrEdge ? (
+    //         <p className={cx(styles.text, styles.browserWarning)}>
+    //           <FormattedMessage
+    //             id="app.audioModal.unsupportedBrowserLabel"
+    //             description="Warning when someone joins with a browser that isnt supported"
+    //             values={{
+    //               0: <a href="https://www.google.com/chrome/">Chrome</a>,
+    //               1: <a href="https://getfirefox.com">Firefox</a>,
+    //             }}
+    //           />
+    //         </p>
+    //       ) : null}
+    //       {!this.skipAudioOptions()
+    //         ? (
+    //           <header
+    //             data-test="audioModalHeader"
+    //             className={styles.header}
+    //           >
+    //             {
+    //               isIOSChrome ? null
+    //                 : (
+    //                   <h3 className={styles.title}>
+    //                     {content
+    //                       ? intl.formatMessage(this.contents[content].title)
+    //                       : intl.formatMessage(intlMessages.audioChoiceLabel)}
+    //                   </h3>
+    //                 )
+    //             }
+    //           </header>
+    //         )
+    //         : null
+    //       }
+    //       <div className={styles.content}>
+    //         {this.renderContent()}
+    //       </div>
+    //     </Modal>
+    //   </span>
+    // );
   }
 }
 

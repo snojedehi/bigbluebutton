@@ -108,10 +108,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   const autoJoin = getFromUserSettings('bbb_auto_join_audio', APP_CONFIG.autoJoin);
   const { userWebcam, userMic } = userLocks;
   const openAudioModal = () => new Promise((resolve) => {
-    const b=mountModal(<AudioModalContainer resolve={resolve} />);
-    // b.closeModal()
-  }).then(() => {
-    mountModal(null)
+    mountModal(<AudioModalContainer resolve={resolve} />);
   });
 
   const openVideoPreviewModal = () => new Promise((resolve) => {
