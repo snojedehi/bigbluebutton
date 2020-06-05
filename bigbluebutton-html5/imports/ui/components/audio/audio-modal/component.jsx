@@ -536,7 +536,7 @@ class AudioModal extends Component {
     } = this.props;
 
     const { content } = this.state;
-
+    mountModal(null)
     return (
       <span>
         {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
