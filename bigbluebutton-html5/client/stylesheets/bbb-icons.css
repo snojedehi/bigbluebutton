@@ -165,6 +165,9 @@
   content: "⏱️";
 }
 .icon-bbb-hand:before {
+  content: "\e90f";
+}
+.icon-bbb-myhand:before {
   content: "🤚";
 }
 .icon-bbb-undecided:before {
