@@ -108,7 +108,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   const autoJoin = getFromUserSettings('bbb_auto_join_audio', APP_CONFIG.autoJoin);
   const { userWebcam, userMic } = userLocks;
   const openAudioModal = () => new Promise((resolve) => {
-    mountModal(<AudioModalContainer resolve={resolve} />);
+    // mountModal(<AudioModalContainer resolve={resolve} />);
   });
 
   const openVideoPreviewModal = () => new Promise((resolve) => {
@@ -168,9 +168,9 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       if (enableVideo && autoShareWebcam) {
         openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else {
-        // handleJoinMicrophone()
+        handleJoinMicrophone()
         // handleJoinListenOnly()
-        openAudioModal();
+        // openAudioModal();
         didMountAutoJoin = true;
       }
     },
