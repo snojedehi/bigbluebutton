@@ -353,6 +353,7 @@
     "app.actionsBar.emojiMenu.confusedLabel": "Confundido",
     "app.actionsBar.emojiMenu.confusedDesc": "Cambiar tu estado a confundido",
     "app.actionsBar.emojiMenu.sadLabel": "Triste",
+    "app.actionsBar.emojiMenu.loveLabel": "Love",
     "app.actionsBar.emojiMenu.sadDesc": "Cambiar tu estado a triste",
     "app.actionsBar.emojiMenu.happyLabel": "Feliz",
     "app.actionsBar.emojiMenu.happyDesc": "Cambiar tu estado a feliz",
