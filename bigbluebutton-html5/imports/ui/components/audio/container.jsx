@@ -135,7 +135,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
     },
   });
   var handleJoinMicrophone=()=>{
-    Service.joinMicrophone();
+    Service.joinMicrophone().then(() => {
+      Service.toggleMuteMicrophone()
+    });
+
   }
   var handleJoinListenOnly=()=>{
 
