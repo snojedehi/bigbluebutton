@@ -134,10 +134,15 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       setTimeout(() => openAudioModal(), 0);
     },
   });
+  var handleJoinMicrophone=()=>{
+    return Service.joinMicrophone().then(() => {
+
+    });
+  }
   var handleJoinListenOnly=()=>{
 
 
-    return Service.joinListenOnly().then(() => {
+    return Service.joinListenOnl().then(() => {
     }).catch((err) => {
       if (err.type === 'MEDIA_ERROR') {
         this.setState({
@@ -162,6 +167,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       if (enableVideo && autoShareWebcam) {
         openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else {
+        handleJoinMicrophone()
         handleJoinListenOnly()
         // openAudioModal();
         didMountAutoJoin = true;
