@@ -1,7 +1,7 @@
 export const EMOJI_STATUSES = {
   // name: icon
   away: 'time',
-  raiseHand: 'hand',
+  raiseHand: 'myhand',
   neutral: 'undecided',
   confused: 'confused',
   sad: 'sad',
