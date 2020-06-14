@@ -56,7 +56,9 @@
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-color: #333333;
+  span{
+    background-color: #333333;
+  }
   &:-moz-focusring {
     outline: none;
   }
