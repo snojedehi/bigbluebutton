@@ -212,7 +212,6 @@ class ActionsDropdown extends PureComponent {
             className={styles.button}
             label={intl.formatMessage(intlMessages.actionsLabel)}
             mycustomicon="fas fa-archive"
-            color="success"
             size="lg"
             circle
             onClick={() => null}
