@@ -13,7 +13,6 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from '../styles';
 import ExternalVideoModal from '/imports/ui/components/external-video-player/modal/container';
-import background from "webdriverio/lib/protocol/background";
 
 const propTypes = {
   amIPresenter: PropTypes.bool.isRequired,
@@ -213,6 +212,7 @@ class ActionsDropdown extends PureComponent {
             className={styles.button}
             label={intl.formatMessage(intlMessages.actionsLabel)}
             mycustomicon="fas fa-archive"
+            color="success"
             size="lg"
             circle
             onClick={() => null}
