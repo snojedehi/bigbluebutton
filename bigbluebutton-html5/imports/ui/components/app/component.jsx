@@ -329,10 +329,9 @@ class App extends Component {
         <NotificationsBarContainer />
         <section className={styles.wrapper}>
           <div className={openPanel ? styles.content : styles.noPanelContent}>
-            {this.renderActionsBar()}
             {this.renderNavBar()}
             {this.renderMedia()}
-
+            {this.renderActionsBar()}
           </div>
           {this.renderPanel()}
           {this.renderSidebar()}
