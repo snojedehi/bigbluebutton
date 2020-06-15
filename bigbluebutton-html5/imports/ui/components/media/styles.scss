@@ -58,11 +58,11 @@ $after-content-order: 3;
 }
 
 .overlayToTop {
-  order: $before-content-order !important;
+  order: $after-content-order !important;
 }
 
 .overlayToBottom {
-  order: $after-content-order !important;
+  order: $before-content-order !important;
 }
 
 .hideOverlay {
