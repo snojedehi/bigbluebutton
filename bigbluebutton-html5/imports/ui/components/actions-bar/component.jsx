@@ -48,9 +48,7 @@ class ActionsBar extends PureComponent {
     return (
       <div className={styles.actionsbar}>
         <div className={styles.left}>
-          <div className={styles.right}>
-            <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />
-          </div>
+
           <ActionsDropdown {...{
             amIPresenter,
             amIModerator,
