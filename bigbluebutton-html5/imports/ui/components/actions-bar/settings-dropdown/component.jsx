@@ -310,7 +310,7 @@ class SettingsDropdown extends PureComponent {
       >
         <DropdownTrigger tabIndex={0} accessKey={OPEN_OPTIONS_AK}>
           <Button
-            label={intl.formatMessage(intlMessages.optionsLabel)}
+            label="Ss"
             customIcon="fas fa-bars"
             ghost
             circle
