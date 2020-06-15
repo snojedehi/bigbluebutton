@@ -312,7 +312,7 @@ class SettingsDropdown extends PureComponent {
           <Button
             label={intl.formatMessage(intlMessages.optionsLabel)}
             // icon="more"
-              mycustomicon="fas fa-bars"
+              mycustomicon="fas fa-caret-down"
             ghost
             circle
             hideLabel
