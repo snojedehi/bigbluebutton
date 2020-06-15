@@ -309,7 +309,18 @@ class SettingsDropdown extends PureComponent {
         onHide={this.onActionsHide}
       >
         <DropdownTrigger tabIndex={0} accessKey={OPEN_OPTIONS_AK}>
+          <Button
+            label={intl.formatMessage(intlMessages.optionsLabel)}
+            icon="more"
+            ghost
+            circle
+            hideLabel
+            className={styles.btn}
 
+            // FIXME: Without onClick react proptypes keep warning
+            // even after the DropdownTrigger inject an onClick handler
+            onClick={() => null}
+          />
         </DropdownTrigger>
         <DropdownContent placement="bottom right">
           <DropdownList>
