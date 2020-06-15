@@ -100,7 +100,7 @@ class NavBar extends PureComponent {
               label={intl.formatMessage(intlMessages.toggleUserListLabel)}
               aria-label={ariaLabel}
               // icon="user"
-              mycustomicon="fas fa-user-graduate"
+              mycustomicon="fas fa-bars"
               color="success"
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
