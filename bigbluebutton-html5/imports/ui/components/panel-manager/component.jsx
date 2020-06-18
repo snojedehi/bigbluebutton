@@ -7,6 +7,7 @@ import NoteContainer from '/imports/ui/components/note/container';
 import PollContainer from '/imports/ui/components/poll/container';
 import CaptionsContainer from '/imports/ui/components/captions/pad/container';
 import WaitingUsersPanel from '/imports/ui/components/waiting-users/container';
+import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import Resizable from 're-resizable';
 import { styles } from '/imports/ui/components/app/styles';
