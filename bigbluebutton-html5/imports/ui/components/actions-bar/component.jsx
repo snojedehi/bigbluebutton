@@ -55,7 +55,7 @@ class ActionsBar extends PureComponent {
                 Session.set('openPanel', 'userlist');
               }}
               id="tttest"
-              aria-label={styles.publicChat}
+              className={styles.publicChat}
               label="test"
               mycustomicon="fas fa-comment"
           />
