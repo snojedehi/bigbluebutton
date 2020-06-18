@@ -297,7 +297,7 @@ class MessageForm extends PureComponent {
             onChange={this.handleMessageChange}
             onKeyDown={this.handleMessageKeyDown}
           />
-          <div className={styles.emojiHolder} style={emoji?"":"display:none"}>
+          <div className={styles.emojiHolder} style={this.props.emoji?"":"display:none"}>
             sas
           </div>
           <Button
@@ -309,7 +309,7 @@ class MessageForm extends PureComponent {
               disabled={disabled}
               label={intl.formatMessage(messages.submitLabel)}
               mycustomicon="far fa-laugh"
-              onClick={() => {this.props.emoji=true}}
+              // onClick={() => {this.props.emoji=true}}
               data-test="sendMessageButton"
           />
           <Button
