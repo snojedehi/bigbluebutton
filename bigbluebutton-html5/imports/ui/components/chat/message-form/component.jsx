@@ -277,6 +277,7 @@ class MessageForm extends PureComponent {
         onSubmit={this.handleSubmit}
       >
         <div className={styles.wrapper}>
+
           <TextareaAutosize
             className={styles.input}
             id="message-input"
@@ -302,7 +303,7 @@ class MessageForm extends PureComponent {
               type="submit"
               disabled={disabled}
               label={intl.formatMessage(messages.submitLabel)}
-              icon="send"
+              mycustomicon="far fa-laugh"
               onClick={() => {}}
               data-test="sendMessageButton"
           />
