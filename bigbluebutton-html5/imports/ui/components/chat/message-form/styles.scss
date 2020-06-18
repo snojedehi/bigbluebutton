@@ -16,7 +16,11 @@
   flex-direction: row;
 }
 .emojiHolder{
-
+  position: absolute;
+  bottom: 65px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 .actions {
   display: flex;
