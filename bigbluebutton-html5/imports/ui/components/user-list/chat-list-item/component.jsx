@@ -86,7 +86,7 @@ const ChatListItem = (props) => {
       id="chat-toggle-button"
       aria-label={isPublicChat(chat) ? intl.formatMessage(intlMessages.titlePublic) : chat.name}
     >
-      <script>aleert({chat.userId})</script>
+      chatID{chat.userId}
 
       <div className={styles.chatListItemLink}>
         <div className={styles.chatIcon}>
