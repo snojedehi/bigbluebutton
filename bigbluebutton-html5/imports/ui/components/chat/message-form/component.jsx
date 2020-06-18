@@ -15,10 +15,10 @@ const propTypes = {
   minMessageLength: PropTypes.number.isRequired,
   maxMessageLength: PropTypes.number.isRequired,
   chatTitle: PropTypes.string.isRequired,
-  emoji: PropTypes.bool,
   chatName: PropTypes.string.isRequired,
   className: PropTypes.string,
   chatAreaId: PropTypes.string.isRequired,
+  emoji: PropTypes.bool,
   handleSendMessage: PropTypes.func.isRequired,
   UnsentMessagesCollection: PropTypes.objectOf(Object).isRequired,
   connected: PropTypes.bool.isRequired,
@@ -260,7 +260,7 @@ class MessageForm extends PureComponent {
   }
 
   render() {
-    let {
+    const {
       intl,
       chatTitle,
       chatName,
@@ -309,7 +309,7 @@ class MessageForm extends PureComponent {
               disabled={disabled}
               label={intl.formatMessage(messages.submitLabel)}
               mycustomicon="far fa-laugh"
-              onClick={() => {emoji=true}}
+              onClick={() => {this.props.emoji=true}}
               data-test="sendMessageButton"
           />
           <Button
