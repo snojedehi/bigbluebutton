@@ -65,7 +65,7 @@ class ActionsBar extends PureComponent {
               }}
               id="tttest"
               className={cx(styles.publicChat,Session.equals('openPanel', 'chat')?"show":"hide")}
-              label="test"
+              label={chat.unreadCounter}
               mycustomicon="fas fa-comment"
           />
           <div className={styles.right}>
