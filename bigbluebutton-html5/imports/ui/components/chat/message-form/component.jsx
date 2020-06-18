@@ -296,38 +296,7 @@ class MessageForm extends PureComponent {
             onKeyDown={this.handleMessageKeyDown}
           />
           <div className={styles.emojiHolder}>
-            <div className="emoji-list hidden" style="z-index: 1;">
-              <button data-emoji="0x1F603" className="btn-flat">😃</button>
-              <button data-emoji="0x1F604" className="btn-flat">😄</button>
-              <button data-emoji="0x1F60A" className="btn-flat">😊</button>
-              <button data-emoji="0x1F601" className="btn-flat">😁</button>
-              <button data-emoji="0x1F602" className="btn-flat">😂</button>
-              <button data-emoji="0x1F605" className="btn-flat">😅</button>
-              <button data-emoji="0x1F609" className="btn-flat">😉</button>
-              <button data-emoji="0x1F61C" className="btn-flat">😜</button>
-              <button data-emoji="0x1F60D" className="btn-flat">😍</button>
-              <button data-emoji="0x1F618" className="btn-flat">😘</button>
-              <button data-emoji="0x1F60F" className="btn-flat">😏</button>
-              <button data-emoji="0x1F612" className="btn-flat">😒</button>
-              <button data-emoji="0x1F61E" className="btn-flat">😞</button>
-              <button data-emoji="0x1F629" className="btn-flat">😩</button>
-              <button data-emoji="0x1F622" className="btn-flat">😢</button>
-              <button data-emoji="0x1F62D" className="btn-flat">😭</button>
-              <button data-emoji="0x1F624" className="btn-flat">😤</button>
-              <button data-emoji="0x1F621" className="btn-flat">😡</button>
-              <button data-emoji="0x1F632" className="btn-flat">😲</button>
-              <button data-emoji="0x1F628" className="btn-flat">😨</button>
-              <button data-emoji="0x1F631" className="btn-flat">😱</button>
-              <button data-emoji="0x1F64F" className="btn-flat">🙏</button>
-              <button data-emoji="0x1F44D" className="btn-flat">👍</button>
-              <button data-emoji="0x1F44E" className="btn-flat">👎</button>
-              <button data-emoji="0x1F44F" className="btn-flat">👏</button>
-              <button data-emoji="0x1F44B" className="btn-flat">👋</button>
-              <button data-emoji="0x1F44C" className="btn-flat">👌</button>
-              <button data-emoji="0x270C" className="btn-flat">✌</button>
-              <button data-emoji="0x2764" className="btn-flat">❤</button>
-              <button data-emoji="0x1F339" className="btn-flat">🌹</button>
-            </div>
+            sas
           </div>
           <Button
               hideLabel
