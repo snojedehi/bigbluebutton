@@ -118,6 +118,16 @@ class PanelManager extends PureComponent {
         key={enableResize ? null : this.userlistKey}
         aria-hidden={ariaHidden}
       >
+        <Button
+            onClick={() => {
+              Session.set('idChatOpen', '');
+              Session.set('openPanel', 'userlist');
+            }}
+            id="tttest"
+            aria-label=""
+            label="test"
+            mycustomicon="fas fa-comment"
+        />
         <UserListContainer />
       </div>
     );
@@ -167,15 +177,7 @@ class PanelManager extends PureComponent {
         aria-label={intl.formatMessage(intlMessages.chatLabel)}
         key={enableResize ? null : this.chatKey}
       >
-        <Button
-            onClick={() => {
-              Session.set('idChatOpen', '');
-              Session.set('openPanel', 'userlist');
-            }}
-            aria-label=""
-            label="test"
-            mycustomicon="fas fa-comment"
-        />
+
         <ChatContainer />
       </section>
     );
