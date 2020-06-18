@@ -18,7 +18,6 @@ const propTypes = {
   chatName: PropTypes.string.isRequired,
   className: PropTypes.string,
   chatAreaId: PropTypes.string.isRequired,
-  emoji: PropTypes.bool,
   handleSendMessage: PropTypes.func.isRequired,
   UnsentMessagesCollection: PropTypes.objectOf(Object).isRequired,
   connected: PropTypes.bool.isRequired,
@@ -67,7 +66,7 @@ const messages = defineMessages({
     description: 'displayed when 4 or more users are typing',
   },
 });
-
+const emoji = false
 const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
 
 class MessageForm extends PureComponent {
@@ -267,7 +266,6 @@ class MessageForm extends PureComponent {
       disabled,
       className,
       chatAreaId,
-      emoji
     } = this.props;
 
     const { hasErrors, error, message } = this.state;
@@ -309,7 +307,7 @@ class MessageForm extends PureComponent {
               disabled={disabled}
               label={intl.formatMessage(messages.submitLabel)}
               mycustomicon="far fa-laugh"
-              onClick={() => {this.props.emoji=true}}
+              onClick={() => {emoji=true}}
               data-test="sendMessageButton"
           />
           <Button
