@@ -78,7 +78,7 @@ const ChatListItem = (props) => {
     <div
       data-test="chatButton"
       role="button"
-      className={cx(styles.chatListItem, linkClasses)}
+      className={cx(styles.chatListItem, linkClasses,isPublicChat(chat) ? "publicIcon" : "")}
       aria-expanded={isCurrentChat}
       tabIndex={tabIndex}
       accessKey={isPublicChat(chat) ? TOGGLE_CHAT_PUB_AK : null}
