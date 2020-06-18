@@ -7,7 +7,6 @@ import NoteContainer from '/imports/ui/components/note/container';
 import PollContainer from '/imports/ui/components/poll/container';
 import CaptionsContainer from '/imports/ui/components/captions/pad/container';
 import WaitingUsersPanel from '/imports/ui/components/waiting-users/container';
-import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import Resizable from 're-resizable';
 import { styles } from '/imports/ui/components/app/styles';
@@ -118,16 +117,6 @@ class PanelManager extends PureComponent {
         key={enableResize ? null : this.userlistKey}
         aria-hidden={ariaHidden}
       >
-        <Button
-            onClick={() => {
-              Session.set('idChatOpen', '');
-              Session.set('openPanel', 'userlist');
-            }}
-            id="tttest"
-            aria-label=""
-            label="test"
-            mycustomicon="fas fa-comment"
-        />
         <UserListContainer />
       </div>
     );
@@ -177,7 +166,6 @@ class PanelManager extends PureComponent {
         aria-label={intl.formatMessage(intlMessages.chatLabel)}
         key={enableResize ? null : this.chatKey}
       >
-
         <ChatContainer />
       </section>
     );
