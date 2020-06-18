@@ -51,7 +51,8 @@ class ActionsBar extends PureComponent {
         <div className={styles.left}>
           <Button
               onClick={() => {
-                Session.set('idChatOpen', 'public');
+                Session.set('idChatOpen', 'Public');
+                // Session.set('idChatOpen', '');
               }}
               id="tttest"
               className={styles.publicChat}
