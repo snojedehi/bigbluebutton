@@ -9,6 +9,7 @@ import JoinVideoOptionsContainer from '../video-provider/video-button/container'
 import CaptionsButtonContainer from '/imports/ui/components/actions-bar/captions/container';
 import PresentationOptionsContainer from './presentation-options/component';
 import SettingsDropdownContainer from "../nav-bar/settings-dropdown/container";
+import Button from '/imports/ui/components/button/component';
 
 class ActionsBar extends PureComponent {
   render() {
@@ -48,6 +49,16 @@ class ActionsBar extends PureComponent {
     return (
       <div className={styles.actionsbar}>
         <div className={styles.left}>
+          <Button
+              onClick={() => {
+                Session.set('idChatOpen', '');
+                Session.set('openPanel', 'userlist');
+              }}
+              id="tttest"
+              aria-label={styles.publicChat}
+              label="test"
+              mycustomicon="fas fa-comment"
+          />
           <div className={styles.right}>
             <SettingsDropdownContainer amIModerator={amIModerator}  />
           </div>

@@ -5,7 +5,9 @@
   --mobile-swap-offset: 3.5rem;
   --min-modal-height: 20rem;
 }
-
+.publicChat{
+  position: absolute;
+}
 .modal {
   @extend .modal;
   padding: var(--jumbo-padding-y);
