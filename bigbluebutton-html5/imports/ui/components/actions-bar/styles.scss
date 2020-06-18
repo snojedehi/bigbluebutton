@@ -6,15 +6,14 @@
   --min-modal-height: 20rem;
 }
 .publicChat{
-  left: 10px;
+  eft: 1px;
   position: fixed;
-  bottom: 30px;
+  bottom: 0px;
   z-index: 100;
   background-color: #2687ef;
   border: 1px solid #7dcafd;
-  border-radius: 40px;
   color: #fff;
-  padding: 15px 4px;
+  border-bottom: navajowhite;
 }
 .modal {
   @extend .modal;
