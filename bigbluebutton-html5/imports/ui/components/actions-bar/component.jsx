@@ -52,7 +52,6 @@ class ActionsBar extends PureComponent {
           <Button
               onClick={() => {
                 Session.set('idChatOpen', '');
-                Session.set('openPanel', 'userlist');
               }}
               id="tttest"
               className={styles.publicChat}
