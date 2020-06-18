@@ -295,6 +295,18 @@ class MessageForm extends PureComponent {
             onKeyDown={this.handleMessageKeyDown}
           />
           <Button
+              hideLabel
+              circle
+              className={styles.sendButton}
+              aria-label={intl.formatMessage(messages.submitLabel)}
+              type="submit"
+              disabled={disabled}
+              label={intl.formatMessage(messages.submitLabel)}
+              icon="send"
+              onClick={() => {}}
+              data-test="sendMessageButton"
+          />
+          <Button
             hideLabel
             circle
             className={styles.sendButton}
