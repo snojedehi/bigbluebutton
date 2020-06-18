@@ -10,10 +10,18 @@ import CaptionsButtonContainer from '/imports/ui/components/actions-bar/captions
 import PresentationOptionsContainer from './presentation-options/component';
 import SettingsDropdownContainer from "../nav-bar/settings-dropdown/container";
 import Button from '/imports/ui/components/button/component';
-
+import PropTypes from "prop-types";
+const propTypes = {
+  chat: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    unreadCounter: PropTypes.number.isRequired,
+  }).isRequired
+};
 class ActionsBar extends PureComponent {
   render() {
     const {
+      chat,
       amIPresenter,
       handleExitVideo,
       handleJoinVideo,
@@ -131,5 +139,5 @@ class ActionsBar extends PureComponent {
     );
   }
 }
-
+ActionsBar.propTypes = propTypes;
 export default ActionsBar;

@@ -46,7 +46,6 @@ const defaultProps = {
 };
 
 const handleClickToggleChat = (id) => {
-  alert(id)
   Session.set(
     'openPanel',
     Session.get('openPanel') === 'chat' && Session.get('idChatOpen') === id
