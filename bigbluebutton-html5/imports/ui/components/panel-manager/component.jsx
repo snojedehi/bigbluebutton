@@ -84,7 +84,7 @@ class PanelManager extends PureComponent {
     this.state = {
       chatWidth: DEFAULT_PANEL_WIDTH,
       pollWidth: DEFAULT_PANEL_WIDTH,
-      userlistWidth: 180,
+      userlistWidth: 250,
       noteWidth: DEFAULT_PANEL_WIDTH,
       captionsWidth: DEFAULT_PANEL_WIDTH,
       waitingWidth: DEFAULT_PANEL_WIDTH,
