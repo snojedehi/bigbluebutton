@@ -13,8 +13,10 @@
 .container{
   display: flex;
   align-items: center;
-  margin-bottom: var(--lg-padding-y);
-  margin-top: var(--sm-padding-x);
+  //margin-bottom: var(--lg-padding-y);
+  padding-bottom: var(--lg-padding-y);
+  //margin-top: var(--sm-padding-x);
+  padding-top: var(--sm-padding-x);
   background-color: #4a525b;
 }
 
