@@ -105,7 +105,7 @@ class ActionsBar extends PureComponent {
           }}
           />
         </div>
-        <div className={styles.left}>
+        <div >
           {isLayoutSwapped
             ? (
               <PresentationOptionsContainer
