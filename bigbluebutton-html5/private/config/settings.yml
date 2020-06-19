@@ -15,7 +15,7 @@ public:
     helpLink: https://Classzabanam.com/html5/
     lockOnJoin: true
     cdn: ""
-    basename: "/clm"
+    basename: "/html5client"
     askForFeedbackOnLogout: false
     allowUserLookup: false
     enableNetworkInformation: false
