@@ -295,9 +295,9 @@ class MessageForm extends PureComponent {
             onChange={this.handleMessageChange}
             onKeyDown={this.handleMessageKeyDown}
           />
-          <div className={styles.emojiHolder}  >
-            sas
-          </div>
+          {/*<div className={styles.emojiHolder}  >*/}
+          {/*  sas*/}
+          {/*</div>*/}
           <Button
               hideLabel
               circle
