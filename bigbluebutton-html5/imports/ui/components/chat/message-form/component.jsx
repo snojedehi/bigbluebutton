@@ -298,18 +298,18 @@ class MessageForm extends PureComponent {
           {/*<div className={styles.emojiHolder}  >*/}
           {/*  sas*/}
           {/*</div>*/}
-          <Button
-              hideLabel
-              circle
-              className={styles.sendButton}
-              aria-label={intl.formatMessage(messages.submitLabel)}
-              type="submit"
-              disabled={disabled}
-              label={intl.formatMessage(messages.submitLabel)}
-              mycustomicon="far fa-laugh"
-              onClick={() => {emoji=true}}
-              data-test="sendMessageButton"
-          />
+          {/*<Button*/}
+          {/*    hideLabel*/}
+          {/*    circle*/}
+          {/*    className={styles.sendButton}*/}
+          {/*    aria-label={intl.formatMessage(messages.submitLabel)}*/}
+          {/*    type="submit"*/}
+          {/*    disabled={disabled}*/}
+          {/*    label={intl.formatMessage(messages.submitLabel)}*/}
+          {/*    mycustomicon="far fa-laugh"*/}
+          {/*    onClick={() => {emoji=true}}*/}
+          {/*    data-test="sendMessageButton"*/}
+          {/*/>*/}
           <Button
             hideLabel
             circle
