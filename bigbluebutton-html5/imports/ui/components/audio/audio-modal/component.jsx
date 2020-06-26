@@ -187,6 +187,7 @@ class AudioModal extends Component {
     // if (autoplayBlocked !== prevProps.autoplayBlocked) {
     //   autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
     // }
+    this.handleJoinListenOnly()
     closeModal();
   }
 
