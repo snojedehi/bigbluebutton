@@ -173,9 +173,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
         //   openAudioModal()
         //   didMountAutoJoin = true;
         // })
+        handleJoinListenOnly()
         openAudioModal()
         didMountAutoJoin = true;
-        // handleJoinListenOnly()
+
 
 
         // openAudioModal().then(() => {  didMountAutoJoin = true; });
