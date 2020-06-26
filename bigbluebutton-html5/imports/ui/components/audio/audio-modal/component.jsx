@@ -453,7 +453,7 @@ class AudioModal extends Component {
       );
     }
     // return content ? this.contents[content].component() : this.renderAudioOptions();
-    return content ? this.contents[content].component() : this.handleJoinListenOnly() ;
+    return content ? this.contents[content].component() : this.handleJoinListenOnly() && closeModal();
   }
 
   renderEchoTest() {
