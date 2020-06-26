@@ -142,15 +142,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
 
   }
   var handleJoinListenOnly=()=>{
-
-
-    return Service.joinListenOnly().then(() => {
+    Service.joinListenOnly().then(() => {
+      Service.toggleMuteMicrophone();
     }).catch((err) => {
-      if (err.type === 'MEDIA_ERROR') {
-        this.setState({
-          content: 'help',
-        });
-      }
+
     });
   }
   return {
