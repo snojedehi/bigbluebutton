@@ -184,10 +184,10 @@ class AudioModal extends Component {
   componentDidUpdate(prevProps) {
     const { autoplayBlocked, closeModal } = this.props;
     ////shayan
-    if (autoplayBlocked !== prevProps.autoplayBlocked) {
-      autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
-    }
-    // closeModal();
+    // if (autoplayBlocked !== prevProps.autoplayBlocked) {
+    //   autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
+    // }
+    closeModal();
   }
 
   componentWillUnmount() {
