@@ -164,10 +164,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       if (enableVideo && autoShareWebcam) {
         openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else {
-        handleJoinMicrophone(()=>{
+        // handleJoinMicrophone(()=>{
           openAudioModal()
           didMountAutoJoin = true;
-        })
+        // })
         // handleJoinListenOnly()
         // openAudioModal()
         // didMountAutoJoin = true;
