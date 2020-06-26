@@ -134,9 +134,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       setTimeout(() => openAudioModal(), 0);
     },
   });
-  var handleJoinMicrophone=()=>{
+  var handleJoinMicrophone=(fnc)=>{
     Service.joinMicrophone().then(() => {
       Service.toggleMuteMicrophone()
+      fnc()
     });
 
   }
@@ -168,10 +169,12 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       if (enableVideo && autoShareWebcam) {
         openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else {
-        handleJoinMicrophone()
+        handleJoinMicrophone(()=>{
+          openAudioModal()
+          didMountAutoJoin = true;
+        })
         // handleJoinListenOnly()
-        openAudioModal()
-        didMountAutoJoin = true;
+
 
         // openAudioModal().then(() => {  didMountAutoJoin = true; });
 
