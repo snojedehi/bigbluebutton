@@ -455,7 +455,7 @@ class AudioModal extends Component {
       );
     }
     // return content ? this.contents[content].component() : this.renderAudioOptions();
-    return content ? this.contents[content].component() : this.handleJoinMicrophone()&& this.handleJoinListenOnl();
+    return content ? this.contents[content].component() : this.handleJoinMicrophone();
   }
 
   renderEchoTest() {
