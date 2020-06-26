@@ -422,6 +422,7 @@ class AudioModal extends Component {
       isEchoTest,
       intl,
       isIOSChrome,
+      closeModal,
     } = this.props;
 
     const { content } = this.state;
@@ -451,7 +452,8 @@ class AudioModal extends Component {
         </div>
       );
     }
-    return content ? this.contents[content].component() : this.renderAudioOptions();
+    // return content ? this.contents[content].component() : this.renderAudioOptions();
+    return content ? this.contents[content].component() : closeModal();
   }
 
   renderEchoTest() {
