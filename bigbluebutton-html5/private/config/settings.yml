@@ -98,19 +98,19 @@ public:
       - id: low
         name: Low quality
         default: false
-        bitrate: 30
+        bitrate: 100
       - id: medium
         name: Medium quality
         default: true
-        bitrate: 50
+        bitrate: 200
       - id: high
         name: High quality
         default: false
-        bitrate: 100
+        bitrate: 500
       - id: hd
         name: High definition
         default: false
-        bitrate: 200
+        bitrate: 800
     enableScreensharing: true
     enableVideo: true
     enableVideoStats: false
