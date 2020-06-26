@@ -184,13 +184,12 @@ class AudioModal extends Component {
   componentDidUpdate(prevProps) {
     const { autoplayBlocked, closeModal } = this.props;
     ////shayan
-    this.handleJoinMicrophone();
-    alert(2)
-    // if (autoplayBlocked !== prevProps.autoplayBlocked) {
-    //   autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
-    // }
+    // this.handleJoinMicrophone();
+    if (autoplayBlocked !== prevProps.autoplayBlocked) {
+      autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
+    }
 
-    closeModal();
+    // closeModal();
   }
 
   componentWillUnmount() {
@@ -455,8 +454,8 @@ class AudioModal extends Component {
         </div>
       );
     }
-    // return content ? this.contents[content].component() : this.renderAudioOptions();
-    return content ? this.contents[content].component() : this.handleJoinListenOnly();
+    return content ? this.contents[content].component() : this.renderAudioOptions();
+    // return content ? this.contents[content].component() : this.handleJoinListenOnly();
   }
 
   renderEchoTest() {
