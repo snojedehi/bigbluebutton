@@ -172,12 +172,12 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
         // handleJoinListenOnly()
         setTimeout(
             function () {
-              openAudioModal()
+              openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
             },2000
         )
 
         // openAudioModal().then(() => {  didMountAutoJoin = true; });
-        didMountAutoJoin = true;
+
       }
     },
   };
