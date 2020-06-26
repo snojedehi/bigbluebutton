@@ -170,11 +170,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       } else {
         handleJoinMicrophone()
         // handleJoinListenOnly()
-        setTimeout(
-            function () {
-              openAudioModal().then(() => {  });
-            },2000
-        )
+        openAudioModal()
         didMountAutoJoin = true;
 
         // openAudioModal().then(() => {  didMountAutoJoin = true; });
