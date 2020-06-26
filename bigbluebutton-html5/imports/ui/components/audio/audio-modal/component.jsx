@@ -183,9 +183,10 @@ class AudioModal extends Component {
 
   componentDidUpdate(prevProps) {
     const { autoplayBlocked, closeModal } = this.props;
-    if (autoplayBlocked !== prevProps.autoplayBlocked) {
-      autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
-    }
+    ////shayan
+    // if (autoplayBlocked !== prevProps.autoplayBlocked) {
+    //   autoplayBlocked ? this.setState({ content: 'autoplayBlocked' }) : closeModal();
+    // }
   }
 
   componentWillUnmount() {
@@ -539,7 +540,7 @@ class AudioModal extends Component {
     // return (<span></span>)
     return (
       <span>
-        {/*{showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}*/}
+        {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
         <Modal
           overlayClassName={styles.overlay}
           className={styles.modal}
