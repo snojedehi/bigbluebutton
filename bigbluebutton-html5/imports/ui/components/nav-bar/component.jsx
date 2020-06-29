@@ -43,6 +43,13 @@ const defaultProps = {
 };
 
 class NavBar extends PureComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            createTime: '',
+        };
+    }
   static handleToggleUserList() {
     Session.set(
       'openPanel',
@@ -93,7 +100,7 @@ class NavBar extends PureComponent {
       amIModerator,
       createdTime,
     } = this.props;
-
+    const { createTime } = this.state;
     console.log("meetingInfo",createdTime)
 
     const toggleBtnClasses = {};
