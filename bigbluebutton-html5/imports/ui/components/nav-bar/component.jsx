@@ -81,7 +81,6 @@ class NavBar extends PureComponent {
       }else {
           this.setState({createTime:m+":"+s})
       }
-      console.log(createTime)
   }
   render() {
     const {
@@ -94,7 +93,7 @@ class NavBar extends PureComponent {
       amIModerator,
       createdTime,
     } = this.props;
-    const { createTime } = this.state;
+
     console.log("meetingInfo",createdTime)
 
     const toggleBtnClasses = {};
