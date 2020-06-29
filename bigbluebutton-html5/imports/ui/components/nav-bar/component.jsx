@@ -89,9 +89,7 @@ class NavBar extends PureComponent {
     let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
     ariaLabel += hasUnreadMessages ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
-    this.createTime=""
     var timer = setInterval(function () {
-      this.setS
         const now=new Date()
         const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
         const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
