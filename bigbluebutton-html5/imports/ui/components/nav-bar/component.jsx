@@ -94,6 +94,7 @@ class NavBar extends PureComponent {
       presentationTitle,
       amIModerator,
       createdTime,
+      createTime
     } = this.props;
     const { createTime } = this.state;
     console.log("meetingInfo",createdTime)
