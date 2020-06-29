@@ -32,6 +32,7 @@ const propTypes = {
   presentationTitle: PropTypes.string,
   hasUnreadMessages: PropTypes.bool,
   shortcuts: PropTypes.string,
+  createTime: PropTypes.string,
 };
 
 const defaultProps = {
@@ -67,7 +68,21 @@ class NavBar extends PureComponent {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+    startTime() {
+        const { createdTime } = this.props;
+        const { createTime } = this.state;
 
+        const now=new Date()
+        const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
+        const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
+        const s=Math.floor((now.getTime()-createdTime)/1000%60)
+        if(h>1){
+            this.setState({createTime:h+":"+m+":"+s})
+        }else {
+            this.setState({createTime:m+":"+s})
+        }
+        console.log(createTime)
+    }
   render() {
     const {
       hasUnreadMessages,
@@ -89,18 +104,7 @@ class NavBar extends PureComponent {
     let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
     ariaLabel += hasUnreadMessages ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
-    var timer = setInterval(function () {
-        const now=new Date()
-        const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
-        const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
-        const s=Math.floor((now.getTime()-createdTime)/1000%60)
-        if(h>1){
-            this.setState({createTime:h+":"+m+":"+s})
-        }else {
-            this.setState({createTime:m+":"+s})
-        }
-        console.log(this.createTime)
-    }.bind(this),1000)
+    var timer = setInterval(this.startTime,1000)
 
 
 
