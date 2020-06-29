@@ -74,7 +74,6 @@ class NavBar extends PureComponent {
       const { createTime } = this.state;
 
       const now=new Date()
-      const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
       const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
       const s=Math.floor((now.getTime()-createdTime)/1000%60)
       if(h>1){
@@ -94,7 +93,6 @@ class NavBar extends PureComponent {
       presentationTitle,
       amIModerator,
       createdTime,
-      createTime
     } = this.props;
     const { createTime } = this.state;
     console.log("meetingInfo",createdTime)
