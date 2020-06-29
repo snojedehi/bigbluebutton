@@ -78,8 +78,8 @@ class NavBar extends PureComponent {
       presentationTitle,
       amIModerator,
       createdTime,
-      createTime,
     } = this.props;
+    const { createTime } = this.state;
     console.log("meetingInfo",createdTime)
 
     const toggleBtnClasses = {};
@@ -97,9 +97,9 @@ class NavBar extends PureComponent {
         const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
         const s=Math.floor((now.getTime()-createdTime)/1000%60)
         if(h>1){
-            this.createTime=h+":"+m+":"+s
+            this.setState({createTime:h+":"+m+":"+s})
         }else {
-            this.createTime=m+":"+s
+            this.setState({createTime:m+":"+s})
         }
         console.log(this.createTime)
     }.bind(this),1000)
@@ -131,7 +131,7 @@ class NavBar extends PureComponent {
 
           </div>
           <div className={styles.right}>
-            <span>{this.createTime}</span>
+            <span>{createTime}</span>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
