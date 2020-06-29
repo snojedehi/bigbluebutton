@@ -130,7 +130,6 @@ class NavBar extends PureComponent {
               aria-label={ariaLabel}
               // icon="user"
               mycustomicon="fas fa-bars"
-
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
             />
