@@ -51,8 +51,10 @@
 .recordingControlOFF {
   @extend %recordingControl;
 
-  padding: 7px;
-  border: var(--border-size-small) solid var(--color-white);
+  padding: 1px 15px;
+  border: var(--border-size-small) solid #5f6973;
+  //padding: 7px;
+  //border: var(--border-size-small) solid var(--color-white);
   
   &:focus {
     padding: 5px;
