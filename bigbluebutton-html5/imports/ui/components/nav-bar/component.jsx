@@ -78,6 +78,7 @@ class NavBar extends PureComponent {
       presentationTitle,
       amIModerator,
       createdTime,
+      createTime,
     } = this.props;
     console.log("meetingInfo",createdTime)
 
@@ -88,18 +89,19 @@ class NavBar extends PureComponent {
     let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
     ariaLabel += hasUnreadMessages ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
-    var  createTime=""
-      setInterval(function () {
-          const now=new Date()
-          const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
-          const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
-          const s=Math.floor((now.getTime()-createdTime)/1000%60)
-          if(h>1){
-              createTime=h+":"+m+":"+s
-          }else {
-              createTime=m+":"+s
-          }
-      },1000)
+    this.createTime=""
+    var timer = setInterval(function () {
+      this.setS
+        const now=new Date()
+        const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
+        const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
+        const s=Math.floor((now.getTime()-createdTime)/1000%60)
+        if(h>1){
+            this.createTime=h+":"+m+":"+s
+        }else {
+            this.createTime=m+":"+s
+        }
+    }.bind(this),1000)
 
 
 
