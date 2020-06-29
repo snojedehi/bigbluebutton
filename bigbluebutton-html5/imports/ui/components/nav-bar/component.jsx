@@ -39,6 +39,7 @@ const defaultProps = {
   presentationTitle: 'Default Room Title',
   hasUnreadMessages: false,
   shortcuts: '',
+  createTime:''
 };
 
 class NavBar extends PureComponent {
