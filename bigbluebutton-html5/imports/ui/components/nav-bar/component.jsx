@@ -88,7 +88,7 @@ class NavBar extends PureComponent {
       if(h>1){
           this.setState({createTime:(h.toString().length==1?"0"+h:h)+":"+(m.toString().length==1?"0"+m:m)+":"+(s.toString().length==1?"0"+s:s)})
       }else {
-          this.setState({createTime:(m.toString().length==1?"0"+m:m)+":"+(s.toString().length==1?"0"+s:s)})
+          this.setState({createTime:"00:"+(m.toString().length==1?"0"+m:m)+":"+(s.toString().length==1?"0"+s:s)})
       }
   }
   render() {
