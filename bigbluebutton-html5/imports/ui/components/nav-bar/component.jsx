@@ -101,6 +101,7 @@ class NavBar extends PureComponent {
         }else {
             this.createTime=m+":"+s
         }
+        console.log(this.createTime)
     }.bind(this),1000)
 
 
@@ -130,7 +131,7 @@ class NavBar extends PureComponent {
 
           </div>
           <div className={styles.right}>
-            <span>{createTime}</span>
+            <span>{this.createTime}</span>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
