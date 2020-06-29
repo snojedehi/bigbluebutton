@@ -140,8 +140,8 @@ class NavBar extends PureComponent {
 
           </div>
           <div className={styles.right}>
-              <i className="far fa-clock"></i>
-            <div className={styles.startTime} aria-hidden="true">{createTime}</div>
+              <i className="far fa-clock" style="color:#ffffff"></i>
+            <div className={styles.startTime} aria-hidden="true"> {createTime}</div>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
