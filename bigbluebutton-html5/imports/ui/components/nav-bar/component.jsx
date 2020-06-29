@@ -69,21 +69,21 @@ class NavBar extends PureComponent {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-    startTime() {
-        const { createdTime } = this.props;
-        const { createTime } = this.state;
+  startTime() {
+      const { createdTime } = this.props;
+      const { createTime } = this.state;
 
-        const now=new Date()
-        const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
-        const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
-        const s=Math.floor((now.getTime()-createdTime)/1000%60)
-        if(h>1){
-            this.setState({createTime:h+":"+m+":"+s})
-        }else {
-            this.setState({createTime:m+":"+s})
-        }
-        console.log(createTime)
-    }
+      const now=new Date()
+      const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
+      const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
+      const s=Math.floor((now.getTime()-createdTime)/1000%60)
+      if(h>1){
+          this.setState({createTime:h+":"+m+":"+s})
+      }else {
+          this.setState({createTime:m+":"+s})
+      }
+      console.log(createTime)
+  }
   render() {
     const {
       hasUnreadMessages,
