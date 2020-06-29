@@ -47,7 +47,7 @@ export default withTracker(() => {
     return hasUnreadMessages;
   };
 
-  const { connectRecordingObserver, processOutsideToggleRecording } = Service;
+  const { connectRecordingObserver, processOutsideToggleRecording,meetingInfo } = Service;
   const currentUser = Users.findOne({ userId: Auth.userID }, { fields: { role: 1 } });
   const openPanel = Session.get('openPanel');
   const isExpanded = openPanel !== '';
@@ -60,6 +60,7 @@ export default withTracker(() => {
     currentUserId: Auth.userID,
     processOutsideToggleRecording,
     connectRecordingObserver,
+    meetingInfo,
     meetingId,
     presentationTitle: meetingTitle,
     hasUnreadMessages,
