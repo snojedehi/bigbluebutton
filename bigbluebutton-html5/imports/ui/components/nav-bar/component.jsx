@@ -86,9 +86,9 @@ class NavBar extends PureComponent {
       const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
       const s=Math.floor((now.getTime()-createdTime)/1000%60)
       if(h>1){
-          this.setState({createTime:h+":"+m+":"+s})
+          this.setState({createTime:h.toString().length==1?"0"+h:h+":"+m.toString().length==1?"0"+m:m+":"+s.toString().length==1?"0"+s:s})
       }else {
-          this.setState({createTime:m+":"+s})
+          this.setState({createTime:m.toString().length==1?"0"+m:m+":"+s.toString().length==1?"0"+s:s})
       }
   }
   render() {
@@ -103,7 +103,6 @@ class NavBar extends PureComponent {
       createdTime,
     } = this.props;
     const { createTime } = this.state;
-    console.log("meetingInfo",createdTime)
 
     const toggleBtnClasses = {};
     toggleBtnClasses[styles.btn] = true;
@@ -141,7 +140,7 @@ class NavBar extends PureComponent {
           </div>
           <div className={styles.right}>
               <i className="far fa-clock" ></i>
-            <div className={styles.startTime} aria-hidden="true"> {createTime}</div>
+            <div className={styles.startTime} aria-hidden="true"> {createTime} </div>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
