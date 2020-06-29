@@ -88,6 +88,17 @@ class NavBar extends PureComponent {
     let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
     ariaLabel += hasUnreadMessages ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
+    const now=new Date()
+    var  createTime=""
+    const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
+    const m=Math.floor((now.getTime()-createdTime)/1000/60)
+    if(h>1){
+        createTime=h+":"+m+":0"
+    }else {
+        createTime=m+":0"
+    }
+
+
     return (
       <div className={styles.navbar}>
         <div className={styles.top}>
@@ -107,11 +118,13 @@ class NavBar extends PureComponent {
               accessKey={TOGGLE_USERLIST_AK}
             />
           </div>
-
           <div className={styles.center}>
             <h1 className={styles.presentationTitle}>{presentationTitle}</h1>
 
 
+          </div>
+          <div className={styles.right}>
+            <span>{createTime}</span>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
