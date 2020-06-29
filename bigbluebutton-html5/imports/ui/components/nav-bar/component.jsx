@@ -141,7 +141,7 @@ class NavBar extends PureComponent {
 
           </div>
           <div className={styles.right}>
-            <span>createTime</span>
+            <span>{createTime}</span>
           </div>
           {/*<div className={styles.right}>*/}
           {/*  <SettingsDropdownContainer amIModerator={amIModerator} mountModal={mountModal} />*/}
