@@ -31,7 +31,7 @@ const meetingInfo = () => {
 };
 
 export default {
-  meetingInfo: () => Meetings.findOne({ meetingId: Auth.meetingID }),
+  createdTime: () => Meetings.findOne({ meetingId: Auth.meetingID }, { fields: { 'durationProps.createdTime': 1 }}).durationProps.createdTime,
   connectRecordingObserver: () => connectRecordingObserver(),
   processOutsideToggleRecording: arg => processOutsideToggleRecording(arg),
 };

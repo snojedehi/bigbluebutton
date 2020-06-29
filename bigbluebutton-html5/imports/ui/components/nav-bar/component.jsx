@@ -77,9 +77,9 @@ class NavBar extends PureComponent {
       mountModal,
       presentationTitle,
       amIModerator,
-      meetingInfo,
+      createdTime,
     } = this.props;
-    console.log("meetingInfo",meetingInfo())
+    console.log("meetingInfo",createdTime)
 
     const toggleBtnClasses = {};
     toggleBtnClasses[styles.btn] = true;
