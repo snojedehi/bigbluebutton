@@ -91,7 +91,7 @@ class NavBar extends PureComponent {
     const now=new Date()
     var  createTime=""
     const h=Math.floor((now.getTime()-createdTime)/1000/60/60)
-    const m=Math.floor((now.getTime()-createdTime)/1000%60)
+    const m=Math.floor((now.getTime()-createdTime)/1000/60%60)
     const s=Math.floor((now.getTime()-createdTime)/1000%60)
     if(h>1){
         createTime=h+":"+m+":"+s
