@@ -49,6 +49,7 @@ class NavBar extends PureComponent {
         this.state = {
             createTime: '',
         };
+        this.startTime = this.startTime.bind(this);
     }
   static handleToggleUserList() {
     Session.set(
