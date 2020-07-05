@@ -29,6 +29,7 @@
   position: relative;
   margin-top: var(--talker-margin-sm);
   overflow: hidden;
+  z-index: 1000;
 }
 
 .speaking {
