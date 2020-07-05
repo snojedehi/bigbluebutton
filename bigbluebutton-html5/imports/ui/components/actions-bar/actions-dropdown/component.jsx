@@ -211,7 +211,7 @@ class ActionsDropdown extends PureComponent {
             aria-label={intl.formatMessage(intlMessages.actionsLabel)}
             className={styles.button}
             label={intl.formatMessage(intlMessages.actionsLabel)}
-            mycustomicon="fas fa-archive"
+            mycustomicon="fas fa-tv"
             size="lg"
             circle
             onClick={() => null}
