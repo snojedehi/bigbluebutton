@@ -18,6 +18,7 @@
 }
 
 .bottom {
+  padding-top: 2.7rem;
   @include mq($phone-landscape) {
     margin-top: var(--mobile-margin-top);
   }
