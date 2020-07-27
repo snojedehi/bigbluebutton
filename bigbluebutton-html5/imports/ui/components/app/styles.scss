@@ -7,10 +7,10 @@
 :root {
   --navbar-height: 3.9375rem; // TODO: Change to NavBar real height
   --actionsbar-height: 75px; // TODO: Change to ActionsBar real height
-  --bars-padding: calc(var(--lg-padding-x) - .45rem); // -.45 so user-list and chat title is aligned with the presentation title
+  --bars-padding: calc(var(--lg-padding-x) - .25rem); // -.45 so user-list and chat title is aligned with the presentation title
   --userlist-handle-width: 5px; // 5px so user-list and chat resize handle render as the same size
   --poll-pane-min-width: 20em;
-  --panel-margin-left: 0;
+  --panel-margin-left: 0.1em;
 }
 
 .main {
@@ -23,12 +23,10 @@
 .navbar {
   position: relative;
   text-align: center;
-  background-color: #333333;
+  background-color: #75828f;
   font-size: 1.5rem;
-  //padding: var(--bars-padding) var(--bars-padding) 0 var(--bars-padding);
-  //height: 4rem;
-  padding: 0.23rem;
-  height: 2.5rem;
+  padding: var(--bars-padding) var(--bars-padding) 0 var(--bars-padding);
+  height: 4rem;
 }
 
 .wrapper {
@@ -64,7 +62,7 @@
 
 .content, .noPanelContent {
   @extend %full-page;
-  order: 4;
+  order: 3;
 
   &:before,
   &:after {
@@ -131,7 +129,7 @@
 }
 
 .userlistPad {
-  background-color: #333333;
+  background-color: #4a525b;
   width: var(--userlist-handle-width);
 }
 
@@ -230,9 +228,8 @@
 
 .chatResizable{
   position: absolute !important;
-  left: 0;
+  right: 0;
   bottom: 0;
   height: 40% !important;
   border: 1px solid #75828f;
-  z-index: 100;
 }
