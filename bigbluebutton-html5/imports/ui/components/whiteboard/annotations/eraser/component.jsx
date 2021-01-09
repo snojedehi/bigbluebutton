@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { getFormattedColor, getStrokeWidth, denormalizeCoord } from '../helpers';
+import { getFormattedColor, getStrokeWidth } from '../helpers';
 
 export default class EraserComponent extends Component {
     shouldComponentUpdate(nextProps) {
         const { version } = this.props;
         return version !== nextProps.version;
     }
+    this.denormalizeCoord  (normCoord, sideLength) => ((normCoord / 100) * sideLength).toFixed(2);
 
     getCoordinates() {
+        
         const { slideWidth, slideHeight, annotation } = this.props;
         const { points } = annotation;
         /* eslint-disable prefer-destructuring */
@@ -32,10 +34,10 @@ export default class EraserComponent extends Component {
             y2 = points[1];
         }
         /* eslint-enable prefer-destructuring */
-        const x = denormalizeCoord(x1, slideWidth);
-        const y = denormalizeCoord(y1, slideHeight);
-        const width = denormalizeCoord((x2 - x1), slideWidth);
-        const height = denormalizeCoord((y2 - y1), slideHeight);
+        const x = this.denormalizeCoord(x1, slideWidth);
+        const y = this.denormalizeCoord(y1, slideHeight);
+        const width = this.denormalizeCoord((x2 - x1), slideWidth);
+        const height = this.denormalizeCoord((y2 - y1), slideHeight);
 
         return {
             x,
