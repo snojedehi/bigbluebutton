@@ -9,7 +9,7 @@ export default class EraserComponent extends Component {
         return version !== nextProps.version;
     }
     denormalizeCoord  (normCoord, sideLength) {
-        return ((normCoord / 100) * sideLength).toFixed(2);
+        return((normCoord / 100) * sideLength).toFixed(2);
     }
 
     getCoordinates() {
@@ -57,6 +57,7 @@ export default class EraserComponent extends Component {
             <g>
                 <clipPath id ={clipId}>
                     <rect
+                        style={ {"border":'1px'}}
                         x={results.x}
                         y={results.y}
                         width={results.width}
