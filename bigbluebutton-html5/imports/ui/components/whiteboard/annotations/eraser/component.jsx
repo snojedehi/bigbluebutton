@@ -57,7 +57,7 @@ export default class EraserComponent extends Component {
             <g>
                 <clipPath id ={clipId}>
                     <rect
-                        style={ border : `${isFireFox || isSarafi ? '2px' : '1px'} solid black`}
+                        style={ {border:'1px'}}
                         x={results.x}
                         y={results.y}
                         width={results.width}
