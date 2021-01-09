@@ -54,7 +54,7 @@ export default class EraserComponent extends Component {
         const { annotation } = this.props;
         const clipId = "clip-" + annotation.id ;
         return (
-            <g style={ {border:'1px'}}>
+            <g >
                 <clipPath id ={clipId}>
                     <rect
 
