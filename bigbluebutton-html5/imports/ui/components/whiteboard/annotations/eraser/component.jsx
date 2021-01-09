@@ -8,7 +8,9 @@ export default class EraserComponent extends Component {
         const { version } = this.props;
         return version !== nextProps.version;
     }
-    this.denormalizeCoord  (normCoord, sideLength) => ((normCoord / 100) * sideLength).toFixed(2);
+    denormalizeCoord  (normCoord, sideLength) {
+        ((normCoord / 100) * sideLength).toFixed(2);
+    }
 
     getCoordinates() {
         
